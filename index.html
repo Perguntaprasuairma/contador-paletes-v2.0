@@ -242,15 +242,29 @@ function gerar(){
 
     let total = 0;
 
+    let emDoca = [];
+
     regioes.forEach(regiao=>{
 
         total += dados[regiao].valor;
 
-        texto += `${regiao}: ${dados[regiao].valor} ${dados[regiao].doca ? "🚛 EM DOCA" : "⛔ FORA DA DOCA"}\n`;
+        texto += `${regiao}: ${dados[regiao].valor}\n`;
+
+        if(dados[regiao].doca){
+
+            emDoca.push(regiao);
+
+        }
 
     });
 
-    texto += `\nTOTAL GERAL DE PALETES: ${total}`;
+    texto += `\nTotal de paletes: ${total}\n`;
+
+    if(emDoca.length > 0){
+
+        texto += `\n🚚 Em doca: ${emDoca.join(", ")}`;
+
+    }
 
     document.getElementById("saida").value = texto;
 
