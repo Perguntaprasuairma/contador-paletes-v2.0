@@ -1,15 +1,316 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contador de Paletes V3</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contador de Paletes V3</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:15px;
+    background:#111;
+    color:white;
+    font-family:Arial;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.card{
+    background:#1e1e1e;
+    border-radius:12px;
+    padding:12px;
+    margin-bottom:12px;
+    border:2px solid transparent;
+}
+
+.emdoca{
+    border-color:#00c853;
+    background:#17351f;
+}
+
+.topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.nome{
+    font-weight:bold;
+    font-size:16px;
+}
+
+.valor{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.botoes{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+}
+
+button{
+    border:none;
+    border-radius:10px;
+    padding:10px;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.mais{
+    background:#00c853;
+}
+
+.menos{
+    background:#d50000;
+}
+
+.doca{
+    background:#2962ff;
+    width:100%;
+    margin-top:8px;
+}
+
+.acoes{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:20px;
+}
+
+.acoes button{
+    padding:14px;
+    font-size:16px;
+}
+
+textarea{
+    width:100%;
+    height:250px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    background:#1e1e1e;
+    color:white;
+    padding:10px;
+    box-sizing:border-box;
+}
+
+.total{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    margin-top:20px;
+    color:#00e676;
+}
+
+</style>
 </head>
-<body style="background:#111;color:white;font-family:Arial;text-align:center;padding-top:50px;">
+
+<body>
 
 <h1>📦 Contador de Paletes V3</h1>
 
-<p>GitHub Pages funcionando com sucesso 🚛</p>
+<div id="lista"></div>
+
+<div class="total" id="total">
+TOTAL GERAL: 0
+</div>
+
+<div class="acoes">
+<button class="mais" onclick="gerar()">📋 Gerar Relatório</button>
+<button class="mais" onclick="copiar()">📄 Copiar</button>
+<button class="mais" onclick="compartilhar()">📲 Compartilhar</button>
+<button class="menos" onclick="resetar()">🔄 Resetar Tudo</button>
+</div>
+
+<textarea id="saida"></textarea>
+
+<script>
+
+const regioes = [
+" Santana – SP0",
+" Rio de Janeiro – RJ01",
+" Simões Filho – BA",
+" Jaboatão dos Guararapes",
+" Louveira – SP07",
+" Gravataí – RS",
+" Goiânia – GO02",
+" Betim – MG",
+" Cravinhos – SP05",
+" Curitiba – PR",
+" Itajaí – SC",
+" LONDRINA - LPR20",
+" MARINGA - LPR18"
+];
+
+let dados = JSON.parse(localStorage.getItem("paletesV3")) || {};
+
+regioes.forEach(r=>{
+    if(!dados[r]){
+        dados[r]={
+            valor:0,
+            doca:false
+        }
+    }
+});
+
+const lista = document.getElementById("lista");
+
+function salvar(){
+    localStorage.setItem("paletesV3",JSON.stringify(dados));
+}
+
+function render(){
+
+    lista.innerHTML="";
+
+    let total=0;
+
+    regioes.forEach(regiao=>{
+
+        total += dados[regiao].valor;
+
+        const div = document.createElement("div");
+
+        div.className = dados[regiao].doca ? "card emdoca" : "card";
+
+        div.innerHTML = `
+        
+        <div class="topo">
+            <div class="nome">${regiao}</div>
+            <div class="valor">${dados[regiao].valor}</div>
+        </div>
+
+        <div class="botoes">
+            <button class="mais" onclick="alterar('${regiao}',1)">+1</button>
+            <button class="mais" onclick="alterar('${regiao}',5)">+5</button>
+            <button class="mais" onclick="alterar('${regiao}',10)">+10</button>
+
+            <button class="menos" onclick="alterar('${regiao}',-1)">-1</button>
+            <button class="menos" onclick="alterar('${regiao}',-5)">-5</button>
+            <button class="menos" onclick="alterar('${regiao}',-10)">-10</button>
+        </div>
+
+        <button class="doca" onclick="toggle('${regiao}')">
+            ${dados[regiao].doca ? "🚛 EM DOCA" : "⛔ FORA DA DOCA"}
+        </button>
+
+        `;
+
+        lista.appendChild(div);
+
+    });
+
+    document.getElementById("total").innerHTML=`TOTAL GERAL: ${total}`;
+
+    salvar();
+
+}
+
+function alterar(regiao,valor){
+
+    dados[regiao].valor += valor;
+
+    if(dados[regiao].valor < 0){
+        dados[regiao].valor = 0;
+    }
+
+    render();
+
+}
+
+function toggle(regiao){
+
+    dados[regiao].doca = !dados[regiao].doca;
+
+    render();
+
+}
+
+function gerar(){
+
+    let texto = "";
+
+    let total = 0;
+
+    regioes.forEach(regiao=>{
+
+        total += dados[regiao].valor;
+
+        texto += `${regiao}: ${dados[regiao].valor} ${dados[regiao].doca ? "🚛 EM DOCA" : "⛔ FORA DA DOCA"}\n`;
+
+    });
+
+    texto += `\nTOTAL GERAL DE PALETES: ${total}`;
+
+    document.getElementById("saida").value = texto;
+
+}
+
+function copiar(){
+
+    const saida = document.getElementById("saida");
+
+    saida.select();
+
+    document.execCommand("copy");
+
+    alert("Relatório copiado!");
+
+}
+
+async function compartilhar(){
+
+    const texto = document.getElementById("saida").value;
+
+    if(navigator.share){
+
+        await navigator.share({
+            title:"Relatório",
+            text:texto
+        });
+
+    }else{
+
+        alert("Compartilhamento não suportado.");
+
+    }
+
+}
+
+function resetar(){
+
+    const confirmar = confirm("Deseja resetar tudo?");
+
+    if(!confirmar) return;
+
+    regioes.forEach(r=>{
+
+        dados[r]={
+            valor:0,
+            doca:false
+        }
+
+    });
+
+    render();
+
+    document.getElementById("saida").value="";
+
+}
+
+render();
+
+</script>
 
 </body>
 </html>
