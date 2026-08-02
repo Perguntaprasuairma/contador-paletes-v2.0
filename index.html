@@ -1,330 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Contador de Paletes V3</title>
+<title>LH Control</title>
 
-<style>
+<link rel="stylesheet" href="style.css">
 
-body{
-    margin:0;
-    padding:15px;
-    background:#111;
-    color:white;
-    font-family:Arial;
-}
-
-h1{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.card{
-    background:#1e1e1e;
-    border-radius:12px;
-    padding:12px;
-    margin-bottom:12px;
-    border:2px solid transparent;
-}
-
-.emdoca{
-    border-color:#00c853;
-    background:#17351f;
-}
-
-.topo{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:10px;
-}
-
-.nome{
-    font-weight:bold;
-    font-size:16px;
-}
-
-.valor{
-    font-size:24px;
-    font-weight:bold;
-}
-
-.botoes{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-}
-
-button{
-    border:none;
-    border-radius:10px;
-    padding:10px;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.mais{
-    background:#00c853;
-}
-
-.menos{
-    background:#d50000;
-}
-
-.doca{
-    background:#2962ff;
-    width:100%;
-    margin-top:8px;
-}
-
-.acoes{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    margin-top:20px;
-}
-
-.acoes button{
-    padding:14px;
-    font-size:16px;
-}
-
-textarea{
-    width:100%;
-    height:250px;
-    margin-top:20px;
-    border:none;
-    border-radius:10px;
-    background:#1e1e1e;
-    color:white;
-    padding:10px;
-    box-sizing:border-box;
-}
-
-.total{
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
-    margin-top:20px;
-    color:#00e676;
-}
-
-</style>
 </head>
 
 <body>
 
-<h1>📦 Contador de Paletes V3</h1>
+<header>
 
-<div id="lista"></div>
+<h1>LH Control</h1>
 
-<div class="total" id="total">
-TOTAL GERAL: 0
+<p>Hub Londrina</p>
+
+</header>
+
+<div id="dashboard">
+
+<div class="total">
+
+<h2>Total de Paletes</h2>
+
+<h1 id="totalPallets">0</h1>
+
 </div>
 
-<div class="acoes">
-<button class="mais" onclick="gerar()">📋 Gerar Relatório</button>
-<button class="mais" onclick="copiar()">📄 Copiar</button>
-<button class="mais" onclick="compartilhar()">📲 Compartilhar</button>
-<button class="menos" onclick="resetar()">🔄 Resetar Tudo</button>
 </div>
 
-<textarea id="saida"></textarea>
+<div id="regions"></div>
 
-<script>
+<div class="buttons">
 
-const regioes = [
-" Santana – SP0",
-" Rio de Janeiro – RJ01",
-" Simões Filho – BA",
-" Jaboatão dos Guararapes",
-" Louveira – SP07",
-" Gravataí – RS",
-" Goiânia – GO02",
-" Betim – MG",
-" Cravinhos – SP05",
-" Curitiba – PR",
-" Itajaí – SC",
-" LONDRINA - LPR20",
-" MARINGA - LPR18"
-];
+<button onclick="copyReport()">
 
-let dados = JSON.parse(localStorage.getItem("paletesV3")) || {};
+📋 Copiar Relatório
 
-regioes.forEach(r=>{
-    if(!dados[r]){
-        dados[r]={
-            valor:0,
-            doca:false
-        }
-    }
-});
+</button>
 
-const lista = document.getElementById("lista");
+<button onclick="shareWhatsapp()">
 
-function salvar(){
-    localStorage.setItem("paletesV3",JSON.stringify(dados));
-}
+📲 WhatsApp
 
-function render(){
+</button>
 
-    lista.innerHTML="";
+</div>
 
-    let total=0;
-
-    regioes.forEach(regiao=>{
-
-        total += dados[regiao].valor;
-
-        const div = document.createElement("div");
-
-        div.className = dados[regiao].doca ? "card emdoca" : "card";
-
-        div.innerHTML = `
-        
-        <div class="topo">
-            <div class="nome">${regiao}</div>
-            <div class="valor">${dados[regiao].valor}</div>
-        </div>
-
-        <div class="botoes">
-            <button class="mais" onclick="alterar('${regiao}',1)">+1</button>
-            <button class="mais" onclick="alterar('${regiao}',5)">+5</button>
-            <button class="mais" onclick="alterar('${regiao}',10)">+10</button>
-
-            <button class="menos" onclick="alterar('${regiao}',-1)">-1</button>
-            <button class="menos" onclick="alterar('${regiao}',-5)">-5</button>
-            <button class="menos" onclick="alterar('${regiao}',-10)">-10</button>
-        </div>
-
-        <button class="doca" onclick="toggle('${regiao}')">
-            ${dados[regiao].doca ? "🚛 EM DOCA" : "⛔ FORA DA DOCA"}
-        </button>
-
-        `;
-
-        lista.appendChild(div);
-
-    });
-
-    document.getElementById("total").innerHTML=`TOTAL GERAL: ${total}`;
-
-    salvar();
-
-}
-
-function alterar(regiao,valor){
-
-    dados[regiao].valor += valor;
-
-    if(dados[regiao].valor < 0){
-        dados[regiao].valor = 0;
-    }
-
-    render();
-
-}
-
-function toggle(regiao){
-
-    dados[regiao].doca = !dados[regiao].doca;
-
-    render();
-
-}
-
-function gerar(){
-
-    let texto = "";
-
-    let total = 0;
-
-    let emDoca = [];
-
-    regioes.forEach(regiao=>{
-
-        total += dados[regiao].valor;
-
-        texto += `${regiao}: ${dados[regiao].valor}\n`;
-
-        if(dados[regiao].doca){
-
-            emDoca.push(regiao);
-
-        }
-
-    });
-
-    texto += `\nTotal de paletes: ${total}\n`;
-
-    if(emDoca.length > 0){
-
-        texto += `\n🚚 Em doca: ${emDoca.join(", ")}`;
-
-    }
-
-    document.getElementById("saida").value = texto;
-
-}
-
-function copiar(){
-
-    const saida = document.getElementById("saida");
-
-    saida.select();
-
-    document.execCommand("copy");
-
-    alert("Relatório copiado!");
-
-}
-
-async function compartilhar(){
-
-    const texto = document.getElementById("saida").value;
-
-    if(navigator.share){
-
-        await navigator.share({
-            title:"Relatório",
-            text:texto
-        });
-
-    }else{
-
-        alert("Compartilhamento não suportado.");
-
-    }
-
-}
-
-function resetar(){
-
-    const confirmar = confirm("Deseja resetar tudo?");
-
-    if(!confirmar) return;
-
-    regioes.forEach(r=>{
-
-        dados[r]={
-            valor:0,
-            doca:false
-        }
-
-    });
-
-    render();
-
-    document.getElementById("saida").value="";
-
-}
-
-render();
-
-</script>
+<script src="app.js"></script>
 
 </body>
+
 </html>
