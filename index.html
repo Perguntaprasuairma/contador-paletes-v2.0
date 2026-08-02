@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LH Control</title>
+<title>LH Control V4</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -15,41 +16,74 @@
 
 <header>
 
-<h1>LH Control</h1>
+<h1>🚚 LH CONTROL</h1>
 
 <p>Hub Londrina</p>
 
 </header>
 
-<div id="dashboard">
+<section class="dashboard">
 
-<div class="total">
+<div class="dash-card">
 
-<h2>Total de Paletes</h2>
+<span>📦 Stage</span>
 
-<h1 id="totalPallets">0</h1>
-
-</div>
+<h2 id="totalPallets">0</h2>
 
 </div>
 
-<div id="regions"></div>
+<div class="dash-card">
 
-<div class="buttons">
+<span>🚛 Em Doca</span>
 
-<button onclick="copyReport()">
+<h2 id="docasAtivas">0</h2>
 
-📋 Copiar Relatório
+</div>
+
+<div class="dash-card">
+
+<span>📍 Fan Outs</span>
+
+<h2>10</h2>
+
+</div>
+
+</section>
+
+<section id="regions"></section>
+
+<section class="acoes">
+
+<button onclick="gerarRelatorio()">
+
+📋 Gerar Relatório
 
 </button>
 
-<button onclick="shareWhatsapp()">
+<button onclick="copiarRelatorio()">
+
+📄 Copiar
+
+</button>
+
+<button onclick="compartilharWhatsapp()">
 
 📲 WhatsApp
 
 </button>
 
-</div>
+<button class="reset" onclick="resetarTudo()">
+
+🔄 Resetar
+
+</button>
+
+</section>
+
+<textarea
+id="relatorio"
+placeholder="O relatório aparecerá aqui...">
+</textarea>
 
 <script src="app.js"></script>
 
