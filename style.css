@@ -190,3 +190,50 @@ textarea{
 }
 
 }
+.prioridades{
+
+    margin:20px 0;
+
+}
+
+.prioridades h2{
+
+    margin-bottom:10px;
+
+    color:#FFD54F;
+
+}
+
+.itemPrioridade{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#1E1E1E;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    margin-bottom:8px;
+
+    border-left:6px solid #555;
+
+}
+
+.itemPrioridade span{
+
+    font-weight:bold;
+
+}
+
+.itemPrioridade .valor{
+
+    font-size:18px;
+
+    color:#00E676;
+
+}
