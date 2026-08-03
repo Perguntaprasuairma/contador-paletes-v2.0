@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LH Control V4</title>
+<title>LH Control V4.2</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -22,68 +22,58 @@
 
 </header>
 
+<!-- DASHBOARD -->
 <section class="dashboard">
 
+    <div class="dash-card">
+        <span>📦 Stage</span>
+        <h2 id="totalPallets">0</h2>
+    </div>
+
+    <div class="dash-card">
+        <span>🚛 Em Doca</span>
+        <h2 id="docasAtivas">0</h2>
+    </div>
+
+    <div class="dash-card">
+        <span>📍 Docas Livres</span>
+        <h2 id="docasLivres">6</h2>
+    </div>
+
+</section>
+
+<!-- PRIORIDADES -->
 <section class="prioridades">
 
-<h2>🚨 Prioridades</h2>
+    <h2>🚨 Prioridades</h2>
 
-<div id="painelPrioridades"></div>
-
-</section>
-
-<div class="dash-card">
-
-<span>📦 Stage</span>
-
-<h2 id="totalPallets">0</h2>
-
-</div>
-
-<div class="dash-card">
-
-<span>🚛 Em Doca</span>
-
-<h2 id="docasAtivas">0</h2>
-
-</div>
-
-<div class="dash-card">
-
-<span>📍 Docas Livres</span>
-
-<h2 id="docasLivres">6</h2>
-
-</div>
+    <div id="painelPrioridades"></div>
 
 </section>
 
+<!-- FAN OUTS -->
 <section id="regions"></section>
 
+<!-- DOCAS -->
+<section id="painelDocas"></section>
+
+<!-- AÇÕES -->
 <section class="acoes">
 
 <button onclick="gerarRelatorio()">
-
 📋 Gerar Relatório
-
 </button>
 
 <button onclick="copiarRelatorio()">
-
 📄 Copiar
-
 </button>
 
 <button onclick="compartilharWhatsapp()">
-
 📲 WhatsApp
-
 </button>
 
 <button class="reset" onclick="resetarTudo()">
-
 🔄 Resetar
-
 </button>
 
 </section>
@@ -104,5 +94,4 @@ placeholder="O relatório aparecerá aqui...">
 <script src="app.js"></script>
 
 </body>
-
 </html>
