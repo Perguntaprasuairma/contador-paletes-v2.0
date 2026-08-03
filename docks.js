@@ -285,7 +285,7 @@ function renderDocas() {
 
         painel.id = "painelDocas";
 
-        document.body.appendChild(painel);
+        const painel = document.getElementById("painelDocas");
     }
 
     painel.innerHTML = "<h2>🚚 Docas</h2>";
