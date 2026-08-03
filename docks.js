@@ -26,6 +26,8 @@ if(docas.length === 0){
 
     salvarDocas();
 
+   atualizarDashboard(); 
+
 }
 
 function salvarDocas(){
