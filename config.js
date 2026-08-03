@@ -58,5 +58,5 @@ const REGIOES = [
         nome:"Goiânia",
         codigo:"GO02",
         cor:"#FB8C00"
-    }
+    } 
 ];
