@@ -69,5 +69,42 @@ function atualizarTudo(){
 document.addEventListener("DOMContentLoaded",()=>{
 
     atualizarDashboard();
+function atualizarPrioridades(){
 
+    if(typeof regioes==="undefined") return;
+
+    const painel=document.getElementById("painelPrioridades");
+
+    if(!painel) return;
+
+    painel.innerHTML="";
+
+    const lista=[...regioes]
+        .sort((a,b)=>b.valor-a.valor);
+
+    lista.forEach((r,index)=>{
+
+        const item=document.createElement("div");
+
+        item.className="itemPrioridade";
+
+        item.style.borderLeftColor=r.cor;
+
+        let emoji="⚪";
+
+        if(index===0) emoji="🔴";
+        else if(index===1) emoji="🟠";
+        else if(index===2) emoji="🟡";
+        else emoji="🟢";
+
+        item.innerHTML=`
+            <span>${emoji} ${r.nome}</span>
+            <span class="valor">${r.valor}</span>
+        `;
+
+        painel.appendChild(item);
+
+    });
+
+}
 });
