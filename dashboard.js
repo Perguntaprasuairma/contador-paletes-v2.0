@@ -10,6 +10,7 @@ function atualizarDashboard() {
 
     atualizarDocas();
     
+   
     atualizarPrioridades();
 }
 
