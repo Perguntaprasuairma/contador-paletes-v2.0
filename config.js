@@ -1,1 +1,62 @@
-
+const REGIOES = [
+    {
+        id:1,
+        nome:"Rio de Janeiro",
+        codigo:"RJ01",
+        cor:"#9E9E9E"
+    },
+    {
+        id:2,
+        nome:"Santana",
+        codigo:"SP0",
+        cor:"#1976D2"
+    },
+    {
+        id:3,
+        nome:"Simões Filho",
+        codigo:"BA",
+        cor:"#00BCD4"
+    },
+    {
+        id:4,
+        nome:"Betim",
+        codigo:"MG",
+        cor:"#33691E"
+    },
+    {
+        id:5,
+        nome:"Curitiba",
+        codigo:"PR",
+        cor:"#43A047"
+    },
+    {
+        id:6,
+        nome:"Cravinhos",
+        codigo:"SP05",
+        cor:"#000000"
+    },
+    {
+        id:7,
+        nome:"Jaboatão dos Guararapes",
+        codigo:"",
+        cor:"#8E24AA"
+    },
+    {
+        id:8,
+        nome:"Louveira",
+        codigo:"SP07",
+        cor:"#795548"
+    },
+    {
+        id:9,
+        nome:"Gravataí",
+        codigo:"RS",
+        cor:"#FDD835"
+    },
+    {
+        id:10,
+        nome:"Goiânia",
+        codigo:"GO02",
+        cor:"#FB8C00"
+    }
+];
