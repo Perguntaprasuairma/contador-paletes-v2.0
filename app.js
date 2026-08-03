@@ -164,6 +164,8 @@ render();
 function render(){
 
 salvar();
+  
+atualizarDashboard();
 
 document.getElementById("totalPallets").innerHTML=totalPaletes();
 
