@@ -9,7 +9,8 @@ function atualizarDashboard() {
     atualizarTotalStage();
 
     atualizarDocas();
-
+    
+    atualizarPrioridades();
 }
 
 function atualizarTotalStage() {
