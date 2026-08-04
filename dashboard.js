@@ -4,7 +4,6 @@
 ========================================== */
 
 
-
 function atualizarDashboard(){
 
 
@@ -24,22 +23,29 @@ function atualizarDashboard(){
 
 
 
+
 function atualizarTotalStage(){
 
 
-    const elemento = document.getElementById(
+    const elemento =
+    document.getElementById(
         "totalPallets"
     );
 
 
+    if(!elemento || !stage){
 
-    if(!elemento) return;
+        return;
+
+    }
 
 
 
-    let total = stage.reduce(
+    const total =
+    stage.reduce(
 
-        (soma,regiao)=> soma + regiao.valor,
+        (soma,regiao)=> 
+        soma + Number(regiao.valor),
 
         0
 
@@ -64,11 +70,13 @@ function atualizarTotalStage(){
 function atualizarDocas(){
 
 
-    const docas = Storage.carregarDocas();
+    const docas =
+    Storage.carregarDocas();
 
 
 
-    const ocupadas = docas.filter(
+    const ocupadas =
+    docas.filter(
 
         d=>d.ocupada
 
@@ -76,20 +84,21 @@ function atualizarDocas(){
 
 
 
-    const livres = APP.totalDocas - ocupadas;
+    const livres =
+    APP.totalDocas - ocupadas;
 
 
 
 
 
-    const elementoOcupadas =
+    const campoOcupadas =
     document.getElementById(
         "docasAtivas"
     );
 
 
 
-    const elementoLivres =
+    const campoLivres =
     document.getElementById(
         "docasLivres"
     );
@@ -97,22 +106,23 @@ function atualizarDocas(){
 
 
 
-    if(elementoOcupadas){
 
-        elementoOcupadas.innerText =
+    if(campoOcupadas){
+
+        campoOcupadas.innerText =
         ocupadas;
 
     }
 
 
 
-    if(elementoLivres){
 
-        elementoLivres.innerText =
+    if(campoLivres){
+
+        campoLivres.innerText =
         livres;
 
     }
-
 
 
 }
@@ -128,6 +138,7 @@ function atualizarDocas(){
 function atualizarPrioridades(){
 
 
+
     const painel =
     document.getElementById(
         "painelPrioridades"
@@ -135,7 +146,12 @@ function atualizarPrioridades(){
 
 
 
-    if(!painel) return;
+    if(!painel || !stage){
+
+        return;
+
+    }
+
 
 
 
@@ -148,9 +164,13 @@ function atualizarPrioridades(){
     const prioridades =
     stage.filter(
 
-        r=>r.prioridade && r.valor > 0
+        r=>r.prioridade === true 
+        &&
+        r.valor > 0
 
     );
+
+
 
 
 
@@ -162,22 +182,32 @@ function atualizarPrioridades(){
 
         painel.innerHTML = `
 
+
         <div class="itemPrioridade">
 
+
             <span>
+
             ✅ Sem prioridades
+
             </span>
 
+
             <div class="valor">
+
             -
+
             </div>
 
+
         </div>
+
 
         `;
 
 
         return;
+
 
     }
 
@@ -193,7 +223,9 @@ function atualizarPrioridades(){
 
 
         const item =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
 
@@ -204,7 +236,6 @@ function atualizarPrioridades(){
 
         item.style.borderLeftColor =
         regiao.cor;
-
 
 
 
@@ -227,8 +258,8 @@ function atualizarPrioridades(){
         </div>
 
 
-
         `;
+
 
 
 
