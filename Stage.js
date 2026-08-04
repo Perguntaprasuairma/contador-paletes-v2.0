@@ -8,16 +8,9 @@ let stage = [];
 
 
 
+
+
 function iniciarStage(){
-
-
-    if(typeof Storage === "undefined"){
-
-        console.error("Storage.js não carregado");
-
-        return;
-
-    }
 
 
     stage = Storage.carregarStage() || [];
@@ -38,11 +31,16 @@ function renderizarStage(){
 
 
     const container =
-    document.getElementById("regions");
+    document.getElementById(
+        "regions"
+    );
 
 
+    if(!container){
 
-    if(!container) return;
+        return;
+
+    }
 
 
 
@@ -52,7 +50,7 @@ function renderizarStage(){
 
 
 
-    stage.forEach(regiao => {
+    stage.forEach(regiao=>{
 
 
 
@@ -61,7 +59,212 @@ function renderizarStage(){
 
 
 
-        card.className = "card";
+        card.className =
+        "card";
+
+
+
+        card.style.borderLeftColor =
+        regiao.cor || "#999";
+
+
+
+
+
+        card.innerHTML = `
+
+
+        <div class="topo">
+
+
+            <div class="nome">
+
+
+                ${regiao.nome}
+
+
+                <br>
+
+
+                <small>
+                ${regiao.codigo || ""}
+                </small>
+
+
+            </div>
+
+
+
+            <div class="valor">
+
+                ${regiao.valor || 0}
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <div class="botoes">
+
+
+            <button onclick="alterarStage(${regiao.id},-10)">
+            -10
+            </button>
+
+
+            <button onclick="alterarStage(${regiao.id},-5)">
+            -5
+            </button>
+
+
+            <button onclick="alterarStage(${regiao.id},-1)">
+            -1
+            </button>
+
+
+
+            <button onclick="alterarStage(${regiao.id},1)">
+            +1
+            </button>
+
+
+            <button onclick="alterarStage(${regiao.id},5)">
+            +5
+            </button>
+
+
+            <button onclick="alterarStage(${regiao.id},10)">
+            +10
+            </button>
+
+
+        </div>
+
+
+        `;
+
+
+
+
+        container.appendChild(card);
+
+
+
+    });
+
+
+
+    atualizarTotalStage();
+
+
+}
+
+
+
+
+
+
+
+
+
+function alterarStage(id, quantidade){
+
+
+
+    const destino =
+    stage.find(
+        r=>r.id === id
+    );
+
+
+
+    if(!destino){
+
+        return;
+
+    }
+
+
+
+
+
+    destino.valor =
+    Number(destino.valor || 0)
+    + quantidade;
+
+
+
+
+    if(destino.valor < 0){
+
+        destino.valor = 0;
+
+    }
+
+
+
+
+
+    Storage.salvarStage(stage);
+
+
+
+    renderizarStage();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function atualizarTotalStage(){
+
+
+
+    const campo =
+    document.getElementById(
+        "totalPallets"
+    );
+
+
+
+    if(!campo){
+
+        return;
+
+    }
+
+
+
+
+
+    const total =
+    stage.reduce(
+
+        (soma,r)=>
+        soma + Number(r.valor || 0),
+
+        0
+
+    );
+
+
+
+    campo.innerText =
+    total;
+
+
+}        card.className = "card";
 
 
 
