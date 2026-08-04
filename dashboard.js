@@ -1,112 +1,258 @@
+/* ==========================================
+   LH CONTROL V4.2
+   dashboard.js
+========================================== */
 
-// ======================================
-// dashboard.js
-// Atualização do Dashboard
-// ======================================
 
-function atualizarDashboard() {
+
+function atualizarDashboard(){
+
 
     atualizarTotalStage();
 
+
     atualizarDocas();
-    
-   
+
+
     atualizarPrioridades();
+
+
 }
 
-function atualizarTotalStage() {
 
-    let total = 0;
 
-    if (typeof regioes !== "undefined") {
 
-        regioes.forEach(r => {
 
-            total += Number(r.valor);
 
-        });
+function atualizarTotalStage(){
+
+
+    const elemento = document.getElementById(
+        "totalPallets"
+    );
+
+
+
+    if(!elemento) return;
+
+
+
+    let total = stage.reduce(
+
+        (soma,regiao)=> soma + regiao.valor,
+
+        0
+
+    );
+
+
+
+    elemento.innerText = total;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function atualizarDocas(){
+
+
+    const docas = Storage.carregarDocas();
+
+
+
+    const ocupadas = docas.filter(
+
+        d=>d.ocupada
+
+    ).length;
+
+
+
+    const livres = APP.totalDocas - ocupadas;
+
+
+
+
+
+    const elementoOcupadas =
+    document.getElementById(
+        "docasAtivas"
+    );
+
+
+
+    const elementoLivres =
+    document.getElementById(
+        "docasLivres"
+    );
+
+
+
+
+    if(elementoOcupadas){
+
+        elementoOcupadas.innerText =
+        ocupadas;
 
     }
 
-    const totalEl = document.getElementById("totalPallets");
 
-    if (totalEl)
-        totalEl.textContent = total;
 
-}
+    if(elementoLivres){
 
-function atualizarDocas() {
+        elementoLivres.innerText =
+        livres;
 
-    if (typeof docas === "undefined")
-        return;
+    }
 
-    const ocupadas = docas.filter(d => d.ocupada).length;
 
-    const livres = TOTAL_DOCAS - ocupadas;
-
-    const ocupadasEl = document.getElementById("docasAtivas");
-
-    const livresEl = document.getElementById("docasLivres");
-
-    if (ocupadasEl)
-        ocupadasEl.textContent = ocupadas;
-
-    if (livresEl)
-        livresEl.textContent = livres;
 
 }
 
-function atualizarTudo(){
 
-    atualizarDashboard();
 
-    if(typeof render==="function")
-        render();
 
-    if(typeof renderDocas==="function")
-        renderDocas();
 
-}
 
-document.addEventListener("DOMContentLoaded",()=>{
 
-    atualizarDashboard();
+
+
 function atualizarPrioridades(){
 
-    if(typeof regioes==="undefined") return;
 
-    const painel=document.getElementById("painelPrioridades");
+    const painel =
+    document.getElementById(
+        "painelPrioridades"
+    );
+
+
 
     if(!painel) return;
 
-    painel.innerHTML="";
 
-    const lista=[...regioes]
-        .sort((a,b)=>b.valor-a.valor);
 
-    lista.forEach((r,index)=>{
+    painel.innerHTML = "";
 
-        const item=document.createElement("div");
 
-        item.className="itemPrioridade";
 
-        item.style.borderLeftColor=r.cor;
 
-        let emoji="⚪";
 
-        if(index===0) emoji="🔴";
-        else if(index===1) emoji="🟠";
-        else if(index===2) emoji="🟡";
-        else emoji="🟢";
+    const prioridades =
+    stage.filter(
 
-        item.innerHTML=`
-            <span>${emoji} ${r.nome}</span>
-            <span class="valor">${r.valor}</span>
+        r=>r.prioridade && r.valor > 0
+
+    );
+
+
+
+
+
+
+    if(prioridades.length === 0){
+
+
+        painel.innerHTML = `
+
+        <div class="itemPrioridade">
+
+            <span>
+            ✅ Sem prioridades
+            </span>
+
+            <div class="valor">
+            -
+            </div>
+
+        </div>
+
         `;
+
+
+        return;
+
+    }
+
+
+
+
+
+
+
+
+    prioridades.forEach(regiao=>{
+
+
+
+        const item =
+        document.createElement("div");
+
+
+
+        item.className =
+        "itemPrioridade";
+
+
+
+        item.style.borderLeftColor =
+        regiao.cor;
+
+
+
+
+
+        item.innerHTML = `
+
+
+        <span>
+
+        🚨 ${regiao.nome}
+        ${regiao.codigo}
+
+        </span>
+
+
+        <div class="valor">
+
+        ${regiao.valor}
+
+        </div>
+
+
+
+        `;
+
+
 
         painel.appendChild(item);
 
+
+
     });
 
+
+
 }
-});
+
+
+
+
+
+
+
+
+function atualizarTudo(){
+
+
+    atualizarDashboard();
+
+
+}
