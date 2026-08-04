@@ -1,67 +1,72 @@
-// =====================================================
-// LH CONTROL V4.0.0
-// APP.JS - PARTE 1
-// =====================================================
+/* ==========================================
+   LH CONTROL V4.2
+   app.js
+========================================== */
 
-// Ordem oficial do Linehaul Londrina
 
-const regioes = [
-{
-nome:"Rio de Janeiro",
-codigo:"RJ01",
-cor:"#9E9E9E",
-valor:0,
-doca:false
-},
-{
-nome:"Santana",
-codigo:"SP0",
-cor:"#1976D2",
-valor:0,
-doca:false
-},
-{
-nome:"Simões Filho",
-codigo:"BA",
-cor:"#00BCD4",
-valor:0,
-doca:false
-},
-{
-nome:"Betim",
-codigo:"MG",
-cor:"#33691E",
-valor:0,
-doca:false
-},
-{
-nome:"Curitiba",
-codigo:"PR",
-cor:"#43A047",
-valor:0,
-doca:false
-},
-{
-nome:"Cravinhos",
-codigo:"SP05",
-cor:"#000000",
-valor:0,
-doca:false
-},
-{
-nome:"Jaboatão dos Guararapes",
-codigo:"",
-cor:"#8E24AA",
-valor:0,
-doca:false
-},
-{
-nome:"Louveira",
-codigo:"SP07",
-cor:"#795548",
-valor:0,
-doca:false
-},
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+    console.log(
+        "🚚 LH Control V4.2 iniciado"
+    );
+
+
+
+    iniciarStage();
+
+
+    iniciarDocas();
+
+
+    atualizarDashboard();
+
+
+
+    console.log(
+        "✅ Sistema pronto"
+    );
+
+
+});
+
+
+
+
+
+
+
+
+function resetarTudo(){
+
+
+    const confirmar =
+    confirm(
+    "Deseja apagar todos os dados do LH Control?"
+    );
+
+
+
+    if(!confirmar){
+
+        return;
+
+    }
+
+
+
+
+    Storage.limparTudo();
+
+
+
+    location.reload();
+
+
+
+}},
 {
 nome:"Gravataí",
 codigo:"RS",
