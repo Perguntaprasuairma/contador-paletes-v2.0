@@ -1,130 +1,248 @@
-
-const STORAGE_KEY = "LHCONTROL_V4";
-
-function carregarDados(){
-
-    const dados = localStorage.getItem(STORAGE_KEY);
-
-    return dados ? JSON.parse(dados) : [];
-
-}
-
-function salvarDados(dados){
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(dados)
-    );
-
-}
 /* ==========================================
    LH CONTROL V4.2
    storage.js
 ========================================== */
 
+
 const Storage = {
 
-    carregarStage() {
 
-        const dados = localStorage.getItem(APP.storage.stage);
+    carregarStage(){
 
-        if (!dados) {
+        const dados = localStorage.getItem(
+            APP.storage.stage
+        );
 
-            return JSON.parse(JSON.stringify(REGIOES));
+
+        if(!dados){
+
+            return JSON.parse(
+                JSON.stringify(REGIOES)
+            );
 
         }
+
 
         return JSON.parse(dados);
 
     },
 
-    salvarStage(stage) {
+
+
+
+
+    salvarStage(stage){
 
         localStorage.setItem(
+
             APP.storage.stage,
+
             JSON.stringify(stage)
+
         );
 
     },
 
-    carregarDocas() {
 
-        const dados = localStorage.getItem(APP.storage.docas);
 
-        if (!dados) {
 
-            return JSON.parse(JSON.stringify(DOCAS));
+
+
+    carregarDocas(){
+
+
+        const dados = localStorage.getItem(
+
+            APP.storage.docas
+
+        );
+
+
+        if(!dados){
+
+            return JSON.parse(
+
+                JSON.stringify(DOCAS)
+
+            );
 
         }
 
+
         return JSON.parse(dados);
 
+
     },
 
-    salvarDocas(docas) {
+
+
+
+
+
+    salvarDocas(docas){
+
 
         localStorage.setItem(
+
             APP.storage.docas,
+
             JSON.stringify(docas)
+
         );
+
 
     },
 
-    carregarHistorico() {
 
-        const dados = localStorage.getItem(APP.storage.historico);
 
-        if (!dados)
+
+
+
+
+    carregarHistorico(){
+
+
+        const dados = localStorage.getItem(
+
+            APP.storage.historico
+
+        );
+
+
+        if(!dados){
+
             return [];
 
+        }
+
+
         return JSON.parse(dados);
 
+
     },
 
-    adicionarHistorico(registro) {
 
-        let lista = this.carregarHistorico();
 
-        lista.unshift(registro);
+
+
+
+
+
+    adicionarHistorico(registro){
+
+
+        let historico = this.carregarHistorico();
+
+
+        historico.unshift(registro);
+
+
 
         localStorage.setItem(
+
             APP.storage.historico,
-            JSON.stringify(lista)
+
+            JSON.stringify(historico)
+
         );
+
 
     },
 
-    salvarConfiguracoes(config) {
+
+
+
+
+
+
+
+    salvarConfiguracoes(config){
+
 
         localStorage.setItem(
+
             APP.storage.configuracoes,
+
             JSON.stringify(config)
+
         );
+
 
     },
 
-    carregarConfiguracoes() {
 
-        const dados =
-            localStorage.getItem(APP.storage.configuracoes);
 
-        if (!dados)
+
+
+
+
+
+    carregarConfiguracoes(){
+
+
+        const dados = localStorage.getItem(
+
+            APP.storage.configuracoes
+
+        );
+
+
+
+        if(!dados){
+
             return {};
 
+        }
+
+
+
         return JSON.parse(dados);
+
+
 
     },
 
-    limparTudo() {
 
-        localStorage.removeItem(APP.storage.stage);
 
-        localStorage.removeItem(APP.storage.docas);
 
-        localStorage.removeItem(APP.storage.historico);
 
-        localStorage.removeItem(APP.storage.configuracoes);
+
+
+
+
+    limparTudo(){
+
+
+        localStorage.removeItem(
+
+            APP.storage.stage
+
+        );
+
+
+        localStorage.removeItem(
+
+            APP.storage.docas
+
+        );
+
+
+        localStorage.removeItem(
+
+            APP.storage.historico
+
+        );
+
+
+        localStorage.removeItem(
+
+            APP.storage.configuracoes
+
+        );
+
 
     }
+
+
 
 };
