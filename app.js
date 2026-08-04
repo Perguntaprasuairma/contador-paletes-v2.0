@@ -377,6 +377,13 @@ render();
 
 
 }
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+    iniciarStage();
+
+});
 
 
 // =============================
