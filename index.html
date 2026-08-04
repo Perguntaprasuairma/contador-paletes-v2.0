@@ -18,80 +18,204 @@
 
 <h1>🚚 LH CONTROL</h1>
 
-<p>Hub Londrina</p>
+<p>Hub Londrina | Line Haul</p>
 
 </header>
 
+
+<!-- IDENTIFICAÇÃO DO CARRO -->
+
+<section class="operacao">
+
+<h2>🚛 Operação</h2>
+
+<input 
+id="motorista"
+type="text"
+placeholder="Nome do motorista">
+
+<input 
+id="placa"
+type="text"
+placeholder="Placa do veículo">
+
+
+<select id="docaSelecionada">
+
+<option value="">
+Selecionar Doca
+</option>
+
+<option>Doca 1</option>
+<option>Doca 2</option>
+<option>Doca 3</option>
+<option>Doca 4</option>
+<option>Doca 5</option>
+<option>Doca 6</option>
+
+</select>
+
+
+</section>
+
+
+
 <!-- DASHBOARD -->
+
 <section class="dashboard">
 
-    <div class="dash-card">
-        <span>📦 Stage</span>
-        <h2 id="totalPallets">0</h2>
-    </div>
 
-    <div class="dash-card">
-        <span>🚛 Em Doca</span>
-        <h2 id="docasAtivas">0</h2>
-    </div>
+<div class="dash-card">
 
-    <div class="dash-card">
-        <span>📍 Docas Livres</span>
-        <h2 id="docasLivres">6</h2>
-    </div>
+<span>📦 Stage</span>
+
+<h2 id="totalPallets">
+0
+</h2>
+
+</div>
+
+
+
+<div class="dash-card">
+
+<span>🚛 Em Doca</span>
+
+<h2 id="docasAtivas">
+0
+</h2>
+
+</div>
+
+
+
+<div class="dash-card">
+
+<span>📍 Docas Livres</span>
+
+<h2 id="docasLivres">
+6
+</h2>
+
+</div>
+
 
 </section>
+
+
+
 
 <!-- PRIORIDADES -->
+
 <section class="prioridades">
 
-    <h2>🚨 Prioridades</h2>
+<h2>🚨 Prioridades</h2>
 
-    <div id="painelPrioridades"></div>
+<div id="painelPrioridades"></div>
 
 </section>
+
+
+
 
 <!-- FAN OUTS -->
-<section id="regions"></section>
 
-<!-- DOCAS -->
-<section id="painelDocas"></section>
+<section>
 
-<!-- AÇÕES -->
-<section class="acoes">
+<h2>📦 Fan Outs</h2>
 
-<button onclick="gerarRelatorio()">
-📋 Gerar Relatório
-</button>
-
-<button onclick="copiarRelatorio()">
-📄 Copiar
-</button>
-
-<button onclick="compartilharWhatsapp()">
-📲 WhatsApp
-</button>
-
-<button class="reset" onclick="resetarTudo()">
-🔄 Resetar
-</button>
+<div id="regions"></div>
 
 </section>
 
+
+
+
+<!-- DOCAS -->
+
+<section>
+
+<h2>🏗️ Controle de Docas</h2>
+
+<div id="painelDocas"></div>
+
+</section>
+
+
+
+
+
+<!-- AÇÕES -->
+
+<section class="acoes">
+
+
+<button onclick="gerarRelatorio()">
+
+📋 Gerar Relatório
+
+</button>
+
+
+
+<button onclick="copiarRelatorio()">
+
+📄 Copiar
+
+</button>
+
+
+
+<button onclick="compartilharWhatsapp()">
+
+📲 WhatsApp
+
+</button>
+
+
+
+<button class="reset" onclick="resetarTudo()">
+
+🔄 Resetar
+
+</button>
+
+
+</section>
+
+
+
+
 <textarea
+
 id="relatorio"
+
 placeholder="O relatório aparecerá aqui...">
+
 </textarea>
 
+
+
+
+
 <script src="js/config.js"></script>
+
 <script src="js/storage.js"></script>
+
 <script src="js/history.js"></script>
+
 <script src="js/dashboard.js"></script>
+
 <script src="js/stage.js"></script>
+
 <script src="js/docks.js"></script>
+
 <script src="js/reports.js"></script>
 
 <script src="app.js"></script>
 
+
+
 </body>
+
 </html>
