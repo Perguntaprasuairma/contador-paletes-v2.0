@@ -409,7 +409,16 @@ function finalizarCarga(numero){
 
 
 
-    Storage.adicionarHistorico({
+    registrarHistorico(
+"Saída de paletes",
+{
+destino:doca.regiao,
+motorista:doca.motorista,
+placa:doca.placa,
+paletes:removidos,
+doca:doca.numero
+}
+);
 
 
         data:new Date().toLocaleString(),
