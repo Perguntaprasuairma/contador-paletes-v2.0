@@ -1,67 +1,493 @@
-// ======================================
-// LH CONTROL V4
-// docks.js
-// Controle das Docas
-// ======================================
+/* ==========================================
+   LH CONTROL V4.2
+   docks.js
+========================================== */
 
-const TOTAL_DOCAS = 6;
 
-let docas = JSON.parse(localStorage.getItem("LH_DOCAS")) || [];
+let docas = [];
 
-if(docas.length === 0){
 
-    for(let i=1;i<=TOTAL_DOCAS;i++){
 
-        docas.push({
-            numero:i,
-            ocupada:false,
-            regiao:"",
-            motorista:"",
-            placa:"",
-            id:"",
-            chegada:""
-        });
 
-    }
 
-    salvarDocas();
+function iniciarDocas(){
+
+
+    docas = Storage.carregarDocas();
+
+
+    renderizarDocas();
+
+
+    atualizarDashboard();
+
 
 }
 
-function salvarDocas(){
 
-    localStorage.setItem(
-        "LH_DOCAS",
-        JSON.stringify(docas)
+
+
+
+
+
+
+function renderizarDocas(){
+
+
+    const painel =
+    document.getElementById(
+        "painelDocas"
     );
 
+
+
+    if(!painel) return;
+
+
+
+    painel.innerHTML = "";
+
+
+
+
+
+    docas.forEach(doca=>{
+
+
+
+        const card =
+        document.createElement("div");
+
+
+
+        card.className =
+        "doca-card";
+
+
+
+        if(doca.ocupada){
+
+            card.classList.add("ocupada");
+
+        }
+        else{
+
+            card.classList.add("livre");
+
+        }
+
+
+
+
+
+
+        let conteudo = "";
+
+
+
+
+
+        if(!doca.ocupada){
+
+
+
+            conteudo = `
+
+
+            <div class="doca-topo">
+
+
+            <strong>
+            🏗️ Doca ${doca.numero}
+            </strong>
+
+
+            <span class="status livre">
+            Livre
+            </span>
+
+
+            </div>
+
+
+
+            <button class="doca"
+            onclick="abrirDoca(${doca.numero})">
+
+            🚛 Entrada Caminhão
+
+            </button>
+
+
+
+            `;
+
+
+
+        }else{
+
+
+
+
+
+            conteudo = `
+
+
+
+            <div class="doca-topo">
+
+
+            <strong>
+
+            🏗️ Doca ${doca.numero}
+
+            </strong>
+
+
+            <span class="status ocupado">
+
+            Ocupada
+
+            </span>
+
+
+            </div>
+
+
+
+
+            <p>
+            🚚 ${doca.regiao}
+            </p>
+
+
+            <p>
+            👤 ${doca.motorista}
+            </p>
+
+
+            <p>
+            🚘 ${doca.placa}
+            </p>
+
+
+            <p>
+            📦 ${doca.paletes} paletes
+
+            </p>
+
+
+
+            <button class="doca"
+            onclick="finalizarCarga(${doca.numero})">
+
+            ✅ Finalizar Carregamento
+
+            </button>
+
+
+
+            `;
+
+
+        }
+
+
+
+
+
+        card.innerHTML = conteudo;
+
+
+        painel.appendChild(card);
+
+
+
+    });
+
+
+
 }
 
-function ocuparDoca(numero, dados){
 
-    const doca = docas.find(d=>d.numero===numero);
+
+
+
+
+
+
+
+
+function abrirDoca(numero){
+
+
+
+    const motorista =
+    prompt("Nome do motorista:");
+
+
+
+    if(!motorista) return;
+
+
+
+    const placa =
+    prompt("Placa do veículo:");
+
+
+
+    if(!placa) return;
+
+
+
+
+
+
+    let destino =
+    prompt(
+    "Destino do veículo:"
+    );
+
+
+
+    if(!destino) return;
+
+
+
+
+
+    const quantidade =
+    Number(
+    prompt(
+    "Quantidade de paletes no veículo:"
+    )
+    );
+
+
+
+
+
+    const doca =
+    docas.find(
+
+        d=>d.numero === numero
+
+    );
+
+
+
+
 
     if(!doca) return;
 
-    doca.ocupada=true;
 
-    doca.regiao=dados.regiao;
 
-    doca.motorista=dados.motorista;
 
-    doca.placa=dados.placa;
 
-    doca.id=dados.id;
+    doca.ocupada = true;
 
-    doca.chegada=new Date().toLocaleTimeString(
-        "pt-BR",
-        {
-            hour:"2-digit",
-            minute:"2-digit"
-        }
+    doca.regiao = destino;
+
+    doca.motorista = motorista;
+
+    doca.placa = placa;
+
+    doca.paletes = quantidade || 0;
+
+    doca.entrada = new Date();
+
+
+
+
+
+    Storage.salvarDocas(docas);
+
+
+
+
+
+    renderizarDocas();
+
+
+    atualizarDashboard();
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function finalizarCarga(numero){
+
+
+
+    const doca =
+    docas.find(
+
+        d=>d.numero === numero
+
     );
 
-    salvarDocas();
+
+
+
+    if(!doca) return;
+
+
+
+
+
+    let removidos =
+    Number(
+
+        prompt(
+
+        "Quantos paletes foram removidos do Stage?"
+
+        )
+
+    );
+
+
+
+
+
+    if(!removidos || removidos <= 0){
+
+        return;
+
+    }
+
+
+
+
+
+
+
+    const destino =
+    stage.find(
+
+        r=>r.nome === doca.regiao
+
+    );
+
+
+
+
+
+
+    if(destino){
+
+
+        destino.valor -= removidos;
+
+
+
+        if(destino.valor < 0){
+
+            destino.valor = 0;
+
+        }
+
+
+        Storage.salvarStage(stage);
+
+
+    }
+
+
+
+
+
+
+
+
+    Storage.adicionarHistorico({
+
+
+        data:new Date().toLocaleString(),
+
+
+        destino:doca.regiao,
+
+
+        motorista:doca.motorista,
+
+
+        placa:doca.placa,
+
+
+        paletes:removidos,
+
+
+        doca:doca.numero
+
+
+    });
+
+
+
+
+
+
+
+
+    liberarDoca(doca);
+
+
+
+    renderizarStage();
+
+
+    renderizarDocas();
+
+
+    atualizarDashboard();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function liberarDoca(doca){
+
+
+
+    doca.ocupada = false;
+
+    doca.regiao = null;
+
+    doca.motorista = "";
+
+    doca.placa = "";
+
+    doca.paletes = 0;
+
+    doca.entrada = null;
+
+
+
+
+
+    Storage.salvarDocas(docas);
+
+
+
+}    salvarDocas();
 
     renderDocas();
 
