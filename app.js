@@ -8,24 +8,13 @@ document.addEventListener(
 "DOMContentLoaded",
 ()=>{
 
-
-    console.log(
-        "🚚 LH Control V4.2 iniciado"
-    );
-
-
-
     iniciarStage();
-
 
     iniciarDocas();
 
-
     atualizarDashboard();
 
-
-    mostrarHistorico();
-
+});
 
 
     console.log(
