@@ -16,9 +16,9 @@ const Storage = {
 
         if(!dados){
 
-            return JSON.parse(
-                JSON.stringify(REGIOES)
-            );
+            return typeof REGIOES !== "undefined"
+            ? JSON.parse(JSON.stringify(REGIOES))
+            : [];
 
         }
 
@@ -52,19 +52,15 @@ const Storage = {
 
 
         const dados = localStorage.getItem(
-
             APP.storage.docas
-
         );
 
 
         if(!dados){
 
-            return JSON.parse(
-
-                JSON.stringify(DOCAS)
-
-            );
+            return typeof DOCAS !== "undefined"
+            ? JSON.parse(JSON.stringify(DOCAS))
+            : [];
 
         }
 
@@ -103,9 +99,7 @@ const Storage = {
 
 
         const dados = localStorage.getItem(
-
             APP.storage.historico
-
         );
 
 
@@ -181,9 +175,7 @@ const Storage = {
 
 
         const dados = localStorage.getItem(
-
             APP.storage.configuracoes
-
         );
 
 
@@ -214,30 +206,22 @@ const Storage = {
 
 
         localStorage.removeItem(
-
             APP.storage.stage
-
         );
 
 
         localStorage.removeItem(
-
             APP.storage.docas
-
         );
 
 
         localStorage.removeItem(
-
             APP.storage.historico
-
         );
 
 
         localStorage.removeItem(
-
             APP.storage.configuracoes
-
         );
 
 
