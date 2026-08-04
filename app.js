@@ -14,30 +14,20 @@ document.addEventListener(
 
     atualizarDashboard();
 
-});
-
 
     console.log(
         "✅ Sistema pronto"
     );
 
-
 });
-
-
-
-
-
-
 
 
 function resetarTudo(){
 
 
-
     const confirmar =
     confirm(
-    "Deseja apagar todos os dados do LH Control?"
+        "Deseja apagar todos os dados do LH Control?"
     );
 
 
@@ -47,7 +37,6 @@ function resetarTudo(){
         return;
 
     }
-
 
 
 
