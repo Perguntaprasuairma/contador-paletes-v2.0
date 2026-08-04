@@ -228,7 +228,7 @@ function totalPaletes(){
 
 
 
-function atualizarDashboard(){
+function atualizarTotalStage();
 
 
 
