@@ -8,18 +8,19 @@ document.addEventListener(
 "DOMContentLoaded",
 ()=>{
 
+
     iniciarStage();
-
-    iniciarDocas();
-
-    atualizarDashboard();
 
 
     console.log(
         "✅ Sistema pronto"
     );
 
+
 });
+
+
+
 
 
 function resetarTudo(){
@@ -27,7 +28,7 @@ function resetarTudo(){
 
     const confirmar =
     confirm(
-        "Deseja apagar todos os dados do LH Control?"
+        "Deseja apagar todos os dados?"
     );
 
 
@@ -43,9 +44,7 @@ function resetarTudo(){
     Storage.limparTudo();
 
 
-
     location.reload();
-
 
 
 }
