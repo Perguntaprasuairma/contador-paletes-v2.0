@@ -43,11 +43,13 @@ h1 {
 .nome {
     flex:1;
 }
-
 .controls {
     display:flex;
     align-items:center;
-    gap:4px;
+    justify-content:flex-end;
+    gap:3px;
+    flex-wrap:wrap;
+    max-width:100%;
 }
 
 button {
@@ -59,10 +61,10 @@ button {
 }
 
 .controls button {
-    width:38px;
-    height:35px;
-    font-size:14px;
-    background:#00c853;
+    width:32px;
+    height:32px;
+    font-size:11px;
+    padding:0;
 }
 
 .controls .minus {
@@ -100,6 +102,37 @@ textarea {
     height:160px;
     border-radius:10px;
 }
+    @media (max-width:600px){
+
+    body{
+        padding:5px;
+    }
+
+    h1{
+        font-size:20px;
+    }
+
+    .item{
+        flex-direction:column;
+        align-items:stretch;
+        gap:8px;
+    }
+
+    .nome{
+        text-align:center;
+        font-size:14px;
+    }
+
+    .controls{
+        justify-content:center;
+    }
+
+    .count{
+        min-width:35px;
+        padding:6px;
+    }
+
+    }
 
 
 /* CORES FAN OUT */
