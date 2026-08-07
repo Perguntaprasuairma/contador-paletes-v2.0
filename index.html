@@ -6,60 +6,100 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<title>LH Control - Paletes</title>
+<meta name="theme-color" content="#111111">
+
+<title>LH Control - Contador de Paletes</title>
+
 
 <style>
 
+/* =========================
+   BASE
+========================= */
+
 *{
     box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
+html,
 body{
 
     margin:0;
-    padding:12px;
+    padding:0;
 
     background:#111;
     color:#fff;
 
-    font-family:Arial,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 
 }
+
+
+body{
+
+    padding:18px 16px 30px;
+
+}
+
 
 h1{
 
     text-align:center;
-    font-size:24px;
-    margin:8px 0 15px;
 
-}
+    margin:4px 0 18px;
 
+    font-size:28px;
 
-.total{
-
-    background:#222;
-
-    border-radius:12px;
-
-    padding:15px;
-
-    text-align:center;
-
-    font-size:20px;
-    font-weight:bold;
-
-    margin-bottom:12px;
+    font-weight:800;
 
 }
 
 
 /* =========================
-   FAN OUT
+   LISTA
 ========================= */
 
-.item{
+#lista{
+
+    width:100%;
+
+    max-width:900px;
+
+    margin:0 auto;
+
+}
+
+
+/* =========================
+   CARD FAN OUT
+========================= */
+
+.card{
+
+    background:#1e1e1e;
+
+    border-radius:24px;
+
+    padding:18px 16px 16px;
+
+    margin-bottom:14px;
+
+    border-top:4px solid var(--cor);
+
+    box-shadow:
+        0 4px 14px rgba(0,0,0,.18);
+
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.cabecalho{
 
     display:flex;
 
@@ -67,205 +107,150 @@ h1{
 
     justify-content:space-between;
 
-    gap:10px;
+    gap:12px;
 
-    width:100%;
-
-    margin:8px 0;
-
-    padding:10px;
-
-    border-radius:12px;
-
-    font-weight:bold;
-
-    min-width:0;
+    margin-bottom:14px;
 
 }
 
 
 .nome{
 
-    flex:1;
+    font-size:22px;
 
-    min-width:0;
+    font-weight:800;
 
-    word-break:break-word;
+    line-height:1.15;
+
+    color:#fff;
+
+}
+
+
+.quantidade{
+
+    font-size:44px;
+
+    line-height:1;
+
+    font-weight:800;
+
+    min-width:52px;
+
+    text-align:right;
+
+    color:#fff;
 
 }
 
 
 /* =========================
-   CONTROLES
+   BOTÕES
 ========================= */
 
-.controls{
+.controles{
 
-    display:flex;
+    display:grid;
 
-    align-items:center;
+    grid-template-columns:
+        repeat(6,1fr);
 
-    justify-content:center;
-
-    gap:3px;
-
-    flex-shrink:0;
+    gap:10px;
 
 }
 
 
-.controls button{
-
-    width:34px;
-
-    height:34px;
-
-    padding:0;
+.controles button{
 
     border:0;
 
-    border-radius:7px;
+    border-radius:15px;
+
+    height:64px;
 
     color:#fff;
 
-    font-weight:bold;
+    font-size:20px;
 
-    font-size:11px;
+    font-weight:800;
 
     cursor:pointer;
 
 }
 
 
-.minus{
+.mais{
 
-    background:#d50000;
+    background:#00c853;
 
 }
 
 
-.plus{
+.menos{
+
+    background:#e00000;
+
+}
+
+
+/* =========================
+   STATUS DOCA
+========================= */
+
+.status{
+
+    width:100%;
+
+    margin-top:12px;
+
+    height:60px;
+
+    border:0;
+
+    border-radius:16px;
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+}
+
+
+.status.fora{
+
+    background:#2962ff;
+
+}
+
+
+.status.doca{
 
     background:#00a63c;
 
 }
 
 
-.big{
-
-    background:#1565c0;
-
-}
-
-
-.count{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    width:40px;
-
-    height:34px;
-
-    background:#000;
-
-    color:#fff;
-
-    border-radius:7px;
-
-    font-size:16px;
-
-}
-
-
 /* =========================
-   CORES FAN OUT
+   TOTAL
 ========================= */
 
-.rio{
+.total{
 
-    background:#555;
+    max-width:900px;
 
-}
+    margin:24px auto 18px;
 
+    text-align:center;
 
-.santana{
+    color:#00e676;
 
-    background:linear-gradient(
-        90deg,
-        #1565c0,
-        #ec407a
-    );
+    font-size:42px;
 
-}
-
-
-.simoes{
-
-    background:#0277bd;
-
-}
-
-
-.betim{
-
-    background:#827717;
-
-}
-
-
-.curitiba{
-
-    background:#2e7d32;
-
-}
-
-
-.cravinhos{
-
-    background:#000;
-
-}
-
-
-.jaboatao{
-
-    background:#6a1b9a;
-
-}
-
-
-.louveira{
-
-    background:#6d4c41;
-
-}
-
-
-.gravatai{
-
-    background:#f9a825;
-
-    color:#000;
-
-}
-
-
-.gravatai .count{
-
-    background:#fff;
-
-    color:#000;
-
-}
-
-
-.goiania{
-
-    background:#ef6c00;
+    font-weight:900;
 
 }
 
@@ -274,66 +259,187 @@ h1{
    AÇÕES
 ========================= */
 
-.actions{
+.acoes{
+
+    max-width:900px;
+
+    margin:0 auto;
 
     display:flex;
 
     flex-direction:column;
 
-    gap:10px;
-
-    margin-top:18px;
+    gap:12px;
 
 }
 
 
-.actions button{
+.acao{
 
     width:100%;
+
+    min-height:72px;
+
+    border:0;
+
+    border-radius:18px;
+
+    background:#00c853;
+
+    color:#fff;
+
+    font-size:21px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+}
+
+
+.acao.reset{
+
+    background:#e00000;
+
+}
+
+
+/* =========================
+   RELATÓRIO
+========================= */
+
+#relatorio{
+
+    width:100%;
+
+    max-width:900px;
+
+    display:block;
+
+    margin:18px auto 0;
+
+    min-height:170px;
 
     padding:14px;
 
     border:0;
 
-    border-radius:10px;
+    border-radius:18px;
 
-    background:#0066ff;
+    background:#1e1e1e;
 
     color:#fff;
 
-    font-size:16px;
+    resize:vertical;
 
-    font-weight:bold;
-
-}
-
-
-.actions .reset{
-
-    background:#b00020;
+    font:15px Arial,sans-serif;
 
 }
 
 
-textarea{
+/* =========================
+   MODAL RESET
+========================= */
+
+.modal-fundo{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.72);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:1000;
+
+}
+
+
+.modal{
 
     width:100%;
 
-    height:170px;
+    max-width:420px;
 
-    margin-top:12px;
+    background:#222;
 
-    padding:10px;
+    border-radius:22px;
 
-    border-radius:10px;
+    padding:24px;
+
+    text-align:center;
+
+    box-shadow:
+        0 12px 40px rgba(0,0,0,.5);
+
+}
+
+
+.modal h2{
+
+    margin:0 0 10px;
+
+    font-size:24px;
+
+}
+
+
+.modal p{
+
+    margin:0 0 22px;
+
+    color:#ddd;
+
+    line-height:1.4;
+
+}
+
+
+.modal-botoes{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:10px;
+
+}
+
+
+.modal-botoes button{
+
+    height:54px;
 
     border:0;
 
-    resize:vertical;
+    border-radius:13px;
 
-    font-family:Arial,sans-serif;
+    color:#fff;
 
-    font-size:14px;
+    font-size:17px;
+
+    font-weight:800;
+
+}
+
+
+.cancelar{
+
+    background:#555;
+
+}
+
+
+.confirmar{
+
+    background:#e00000;
 
 }
 
@@ -342,82 +448,92 @@ textarea{
    CELULAR
 ========================= */
 
-@media(max-width:600px){
+@media(max-width:700px){
 
     body{
 
-        padding:6px;
+        padding:
+            14px
+            10px
+            24px;
 
     }
 
 
     h1{
 
-        font-size:21px;
+        font-size:24px;
 
     }
 
 
-    .total{
+    .card{
 
-        font-size:18px;
+        border-radius:22px;
 
-        padding:12px;
-
-    }
-
-
-    .item{
-
-        flex-direction:column;
-
-        align-items:stretch;
-
-        padding:10px;
+        padding:
+            16px
+            14px
+            14px;
 
     }
 
 
     .nome{
 
-        text-align:center;
-
-        font-size:14px;
+        font-size:20px;
 
     }
 
 
-    .controls{
+    .quantidade{
 
-        width:100%;
-
-        justify-content:center;
-
-        flex-wrap:nowrap;
+        font-size:40px;
 
     }
 
 
-    .controls button{
+    .controles{
 
-        width:calc((100vw - 45px) / 7);
-
-        max-width:40px;
-
-        min-width:30px;
-
-        height:34px;
-
-        font-size:10px;
+        gap:8px;
 
     }
 
 
-    .count{
+    .controles button{
 
-        width:40px;
+        height:62px;
 
-        min-width:40px;
+        font-size:18px;
+
+        border-radius:14px;
+
+    }
+
+
+    .status{
+
+        height:58px;
+
+        font-size:17px;
+
+    }
+
+
+    .total{
+
+        font-size:34px;
+
+        margin-top:22px;
+
+    }
+
+
+    .acao{
+
+        min-height:68px;
+
+        font-size:20px;
 
     }
 
@@ -425,34 +541,58 @@ textarea{
 
 
 /* =========================
-   TELAS MUITO PEQUENAS
+   CELULARES PEQUENOS
 ========================= */
 
-@media(max-width:360px){
+@media(max-width:390px){
 
-    .controls{
+    .card{
 
-        gap:2px;
-
-    }
-
-
-    .controls button{
-
-        min-width:28px;
-
-        font-size:9px;
+        padding:
+            14px
+            12px
+            12px;
 
     }
 
 
-    .count{
+    .nome{
 
-        min-width:35px;
+        font-size:18px;
 
-        width:35px;
+    }
 
-        font-size:14px;
+
+    .quantidade{
+
+        font-size:36px;
+
+    }
+
+
+    .controles{
+
+        gap:6px;
+
+    }
+
+
+    .controles button{
+
+        height:56px;
+
+        font-size:16px;
+
+        border-radius:13px;
+
+    }
+
+
+    .status{
+
+        height:54px;
+
+        font-size:16px;
 
     }
 
@@ -469,43 +609,122 @@ textarea{
 <h1>📦 LH Control</h1>
 
 
+<div id="lista"></div>
+
+
 <div class="total">
 
-    Total de Paletes:
-
+    TOTAL GERAL:
     <span id="total">0</span>
 
 </div>
 
 
-<div id="list"></div>
+<div class="acoes">
 
 
-<div class="actions">
+    <button
+        class="acao"
+        onclick="gerarRelatorio()">
 
-    <button onclick="gerarRelatorio()">
         📋 Gerar Relatório
+
     </button>
 
-    <button onclick="copiar()">
+
+    <button
+        class="acao"
+        onclick="copiarRelatorio()">
+
         📄 Copiar
+
     </button>
 
-    <button onclick="compartilhar()">
+
+    <button
+        class="acao"
+        onclick="compartilhar()">
+
         📲 Compartilhar
+
     </button>
 
-    <button class="reset" onclick="resetar()">
-        🔄 Resetar
+
+    <button
+        class="acao reset"
+        onclick="abrirConfirmacao()">
+
+        🔄 Resetar Tudo
+
     </button>
+
 
 </div>
 
 
 <textarea
-    id="output"
+    id="relatorio"
     placeholder="O relatório aparecerá aqui..."
-></textarea>
+    readonly>
+</textarea>
+
+
+
+<!-- =========================
+     CONFIRMAÇÃO RESET
+========================= -->
+
+<div
+    class="modal-fundo"
+    id="modalReset">
+
+
+    <div class="modal">
+
+
+        <h2>
+
+            ⚠️ Resetar contagem?
+
+        </h2>
+
+
+        <p>
+
+            Essa ação vai zerar a contagem
+            de todos os fan outs.
+            Deseja continuar?
+
+        </p>
+
+
+        <div class="modal-botoes">
+
+
+            <button
+                class="cancelar"
+                onclick="fecharConfirmacao()">
+
+                Cancelar
+
+            </button>
+
+
+            <button
+                class="confirmar"
+                onclick="confirmarReset()">
+
+                Resetar
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
 
 
 
@@ -520,52 +739,52 @@ const locais = [
 
     {
         nome:"Rio de Janeiro – RJ01",
-        classe:"rio"
+        cor:"#666666"
     },
 
     {
         nome:"Santana – SP0",
-        classe:"santana"
+        cor:"#1565c0"
     },
 
     {
         nome:"Simões Filho – BA",
-        classe:"simoes"
+        cor:"#0277bd"
     },
 
     {
         nome:"Betim – MG",
-        classe:"betim"
+        cor:"#827717"
     },
 
     {
         nome:"Curitiba – PR",
-        classe:"curitiba"
+        cor:"#2e7d32"
     },
 
     {
         nome:"Cravinhos – SP05",
-        classe:"cravinhos"
+        cor:"#000000"
     },
 
     {
         nome:"Jaboatão dos Guararapes",
-        classe:"jaboatao"
+        cor:"#6a1b9a"
     },
 
     {
         nome:"Louveira – SP07",
-        classe:"louveira"
+        cor:"#6d4c41"
     },
 
     {
         nome:"Gravataí – RS",
-        classe:"gravatai"
+        cor:"#f9a825"
     },
 
     {
         nome:"Goiânia – GO02",
-        classe:"goiania"
+        cor:"#ef6c00"
     }
 
 ];
@@ -575,10 +794,60 @@ const locais = [
    STORAGE
 ========================= */
 
-let contagem =
+const STORAGE =
+    "lh_paletes_layout_v2";
+
+
+let dados =
     JSON.parse(
-        localStorage.getItem("lh_paletes")
-    ) || {};
+        localStorage.getItem(STORAGE)
+        || "{}"
+    );
+
+
+/* =========================
+   INICIALIZAR
+========================= */
+
+function inicializar(){
+
+    locais.forEach(local=>{
+
+        if(!dados[local.nome]){
+
+            dados[local.nome]={
+
+                quantidade:0,
+
+                emDoca:false
+
+            };
+
+        }
+
+
+        if(
+            typeof dados[local.nome].quantidade
+            !=="number"
+        ){
+
+            dados[local.nome].quantidade=0;
+
+        }
+
+
+        if(
+            typeof dados[local.nome].emDoca
+            !=="boolean"
+        ){
+
+            dados[local.nome].emDoca=false;
+
+        }
+
+    });
+
+}
 
 
 /* =========================
@@ -588,35 +857,35 @@ let contagem =
 function salvar(){
 
     localStorage.setItem(
-        "lh_paletes",
-        JSON.stringify(contagem)
+
+        STORAGE,
+
+        JSON.stringify(dados)
+
     );
 
 }
 
 
 /* =========================
-   ALTERAR
+   ALTERAR CONTAGEM
 ========================= */
 
-function alterar(local, valor){
+function alterar(nome,valor){
 
-    if(!contagem[local]){
-
-        contagem[local]=0;
-
-    }
+    dados[nome].quantidade += valor;
 
 
-    contagem[local]+=valor;
+    if(
+        dados[nome].quantidade < 0
+    ){
 
-
-    if(contagem[local]<0){
-
-        contagem[local]=0;
+        dados[nome].quantidade=0;
 
     }
 
+
+    salvar();
 
     render();
 
@@ -624,24 +893,18 @@ function alterar(local, valor){
 
 
 /* =========================
-   TOTAL
+   EM DOCA / FORA
 ========================= */
 
-function calcularTotal(){
+function alternarDoca(nome){
 
-    let soma=0;
-
-
-    locais.forEach(local=>{
-
-        soma += contagem[local.nome] || 0;
-
-    });
+    dados[nome].emDoca =
+        !dados[nome].emDoca;
 
 
-    document.getElementById(
-        "total"
-    ).textContent=soma;
+    salvar();
+
+    render();
 
 }
 
@@ -652,29 +915,53 @@ function calcularTotal(){
 
 function render(){
 
-    const list=
-        document.getElementById("list");
+    inicializar();
 
 
-    list.innerHTML="";
+    const lista =
+        document.getElementById("lista");
+
+
+    lista.innerHTML="";
 
 
     locais.forEach(local=>{
 
 
-        if(
-            typeof contagem[local.nome]
-            !=="number"
-        ){
-
-            contagem[local.nome]=0;
-
-        }
+        const dadosLocal =
+            dados[local.nome];
 
 
-        list.innerHTML += `
+        const statusClasse =
+            dadosLocal.emDoca
+            ? "doca"
+            : "fora";
 
-            <div class="item ${local.classe}">
+
+        const statusTexto =
+            dadosLocal.emDoca
+            ? "🟢 EM DOCA"
+            : "⛔ FORA DA DOCA";
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className="card";
+
+
+        card.style.setProperty(
+            "--cor",
+            local.cor
+        );
+
+
+        card.innerHTML=`
+
+
+            <div class="cabecalho">
+
 
                 <div class="nome">
 
@@ -683,76 +970,126 @@ function render(){
                 </div>
 
 
-                <div class="controls">
+                <div class="quantidade">
 
-
-                    <button
-                        class="minus"
-                        onclick="alterar('${local.nome}',-10)"
-                    >
-                        -10
-                    </button>
-
-
-                    <button
-                        class="minus"
-                        onclick="alterar('${local.nome}',-5)"
-                    >
-                        -5
-                    </button>
-
-
-                    <button
-                        class="minus"
-                        onclick="alterar('${local.nome}',-1)"
-                    >
-                        -1
-                    </button>
-
-
-                    <span class="count">
-
-                        ${contagem[local.nome]}
-
-                    </span>
-
-
-                    <button
-                        class="plus"
-                        onclick="alterar('${local.nome}',1)"
-                    >
-                        +1
-                    </button>
-
-
-                    <button
-                        class="big"
-                        onclick="alterar('${local.nome}',5)"
-                    >
-                        +5
-                    </button>
-
-
-                    <button
-                        class="big"
-                        onclick="alterar('${local.nome}',10)"
-                    >
-                        +10
-                    </button>
-
+                    ${dadosLocal.quantidade}
 
                 </div>
 
+
             </div>
 
+
+
+            <div class="controles">
+
+
+                <button
+                    class="mais"
+                    onclick="alterar(${JSON.stringify(local.nome)},1)">
+
+                    +1
+
+                </button>
+
+
+                <button
+                    class="mais"
+                    onclick="alterar(${JSON.stringify(local.nome)},5)">
+
+                    +5
+
+                </button>
+
+
+                <button
+                    class="mais"
+                    onclick="alterar(${JSON.stringify(local.nome)},10)">
+
+                    +10
+
+                </button>
+
+
+                <button
+                    class="menos"
+                    onclick="alterar(${JSON.stringify(local.nome)},-1)">
+
+                    -1
+
+                </button>
+
+
+                <button
+                    class="menos"
+                    onclick="alterar(${JSON.stringify(local.nome)},-5)">
+
+                    -5
+
+                </button>
+
+
+                <button
+                    class="menos"
+                    onclick="alterar(${JSON.stringify(local.nome)},-10)">
+
+                    -10
+
+                </button>
+
+
+            </div>
+
+
+
+            <button
+                class="status ${statusClasse}"
+                onclick="alternarDoca(${JSON.stringify(local.nome)})">
+
+                ${statusTexto}
+
+            </button>
+
+
         `;
+
+
+        lista.appendChild(card);
+
 
     });
 
 
-    salvar();
-
     calcularTotal();
+
+}
+
+
+/* =========================
+   TOTAL
+========================= */
+
+function calcularTotal(){
+
+    const total =
+        locais.reduce(
+
+            (soma,local)=>
+
+                soma +
+                (
+                    dados[local.nome]
+                    ?.quantidade || 0
+                ),
+
+            0
+
+        );
+
+
+    document.getElementById(
+        "total"
+    ).textContent=total;
 
 }
 
@@ -763,27 +1100,51 @@ function render(){
 
 function gerarRelatorio(){
 
-    let texto="";
+    inicializar();
+
+
+    let texto =
+        "📦 RELATÓRIO DE PALETES\n\n";
 
 
     locais.forEach(local=>{
 
+
+        const item =
+            dados[local.nome];
+
+
         texto +=
-            `${local.nome}: ${contagem[local.nome] || 0}\n`;
+
+            `${local.nome}: ` +
+
+            `${item.quantidade} — ` +
+
+            `${
+                item.emDoca
+                ? "EM DOCA"
+                : "FORA DA DOCA"
+            }\n`;
+
 
     });
 
 
     texto +=
-        `\nTotal de Paletes: ${
-            document.getElementById("total").textContent
-        }`;
+
+        `\nTOTAL GERAL: ` +
+
+        `${locais.reduce(` +
+        `(s,local)=>s + ` +
+        `dados[local.nome].quantidade,0)}`;
 
 
     document.getElementById(
-        "output"
+        "relatorio"
     ).value=texto;
 
+
+    return texto;
 
 }
 
@@ -792,43 +1153,63 @@ function gerarRelatorio(){
    COPIAR
 ========================= */
 
-async function copiar(){
+async function copiarRelatorio(){
 
-    const texto=
-        document.getElementById("output").value;
+    let texto =
+        document.getElementById(
+            "relatorio"
+        ).value;
 
 
     if(!texto){
 
-        gerarRelatorio();
+        texto=gerarRelatorio();
 
     }
-
-
-    const finalTexto=
-        document.getElementById("output").value;
 
 
     try{
 
         await navigator.clipboard.writeText(
-            finalTexto
+            texto
         );
 
-        alert("Relatório copiado!");
 
-    }
+        alert(
+            "Relatório copiado!"
+        );
 
-    catch{
 
-        const area=
-            document.getElementById("output");
+    }catch(e){
+
+        const area =
+            document.getElementById(
+                "relatorio"
+            );
+
+
+        area.removeAttribute(
+            "readonly"
+        );
+
 
         area.select();
 
-        document.execCommand("copy");
 
-        alert("Relatório copiado!");
+        document.execCommand(
+            "copy"
+        );
+
+
+        area.setAttribute(
+            "readonly",
+            "readonly"
+        );
+
+
+        alert(
+            "Relatório copiado!"
+        );
 
     }
 
@@ -841,16 +1222,15 @@ async function copiar(){
 
 async function compartilhar(){
 
-    let texto=
-        document.getElementById("output").value;
+    let texto =
+        document.getElementById(
+            "relatorio"
+        ).value;
 
 
     if(!texto){
 
-        gerarRelatorio();
-
-        texto=
-            document.getElementById("output").value;
+        texto=gerarRelatorio();
 
     }
 
@@ -861,45 +1241,24 @@ async function compartilhar(){
 
             await navigator.share({
 
-                title:"Relatório de Paletes",
+                title:
+                    "Relatório de Paletes",
 
-                text:texto
+                text:
+                    texto
 
             });
 
-        }
+        }catch(e){
 
-        catch(error){
-
-            console.log(
-                "Compartilhamento cancelado."
-            );
+            /* cancelado pelo usuário */
 
         }
 
-    }
 
-    else{
+    }else{
 
-        try{
-
-            await navigator.clipboard.writeText(
-                texto
-            );
-
-            alert(
-                "Relatório copiado. Seu navegador não possui compartilhamento direto."
-            );
-
-        }
-
-        catch{
-
-            alert(
-                "Seu navegador não suporta compartilhamento direto."
-            );
-
-        }
+        await copiarRelatorio();
 
     }
 
@@ -907,26 +1266,44 @@ async function compartilhar(){
 
 
 /* =========================
-   RESET
+   CONFIRMAÇÃO RESET
 ========================= */
 
-function resetar(){
+function abrirConfirmacao(){
 
-    if(
-        confirm(
-            "Deseja zerar todos os paletes?"
-        )
-    ){
+    document.getElementById(
+        "modalReset"
+    ).style.display="flex";
 
-        contagem={};
+}
 
-        render();
 
-        document.getElementById(
-            "output"
-        ).value="";
+function fecharConfirmacao(){
 
-    }
+    document.getElementById(
+        "modalReset"
+    ).style.display="none";
+
+}
+
+
+function confirmarReset(){
+
+    dados={};
+
+
+    salvar();
+
+
+    document.getElementById(
+        "relatorio"
+    ).value="";
+
+
+    fecharConfirmacao();
+
+
+    render();
 
 }
 
@@ -934,6 +1311,8 @@ function resetar(){
 /* =========================
    INICIAR
 ========================= */
+
+inicializar();
 
 render();
 
