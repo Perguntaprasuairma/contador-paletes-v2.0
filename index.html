@@ -365,19 +365,42 @@ function calcularTotal(){
 function gerarRelatorio(){
     inicializar();
 
-    let texto = "📦 RELATÓRIO DE PALETES\n\n";
+    let texto = "📝 Status Atual de Backlog\n\n";
 
+    // Lista de destinos e respectivas quantidades
     locais.forEach(l => {
         const d = dados[l.nome];
-        texto += `${l.nome}: ${d.quantidade} — ${d.emDoca ? "EM DOCA" : "FORA DA DOCA"}\n`;
+
+        texto += `${l.nome}: ${d.quantidade}\n`;
     });
 
-    texto += `\nTOTAL GERAL: ${locais.reduce((s,l) => s + dados[l.nome].quantidade, 0)}`;
+    // Total geral
+    const total = locais.reduce(
+        (soma, l) => soma + (dados[l.nome]?.quantidade || 0),
+        0
+    );
+
+    texto += `\n📦 Total de pallets: ${total}\n`;
+
+    // Destinos em doca
+    const emDoca = locais.filter(
+        l => dados[l.nome]?.emDoca === true
+    );
+
+    texto += `\n🚚 Em doca:\n\n`;
+
+    if(emDoca.length > 0){
+        emDoca.forEach(l => {
+            texto += `* ${l.nome}\n`;
+        });
+    } else {
+        texto += "Nenhum veículo em doca.\n";
+    }
 
     document.getElementById("relatorio").value = texto;
+
     return texto;
 }
-
 async function copiarRelatorio(){
     const texto = document.getElementById("relatorio").value || gerarRelatorio();
 
