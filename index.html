@@ -1,1324 +1,440 @@
-<!DOCTYPE html>
+html = r'''<!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#111111">
-
 <title>LH Control - Contador de Paletes</title>
 
-
 <style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
-/* =========================
-   BASE
-========================= */
-
-*{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-}
-
-html,
-body{
-
+html,body{
     margin:0;
     padding:0;
-
     background:#111;
     color:#fff;
-
     font-family:Arial,Helvetica,sans-serif;
-
 }
-
 
 body{
-
     padding:18px 16px 30px;
-
 }
-
 
 h1{
-
     text-align:center;
-
     margin:4px 0 18px;
-
     font-size:28px;
-
     font-weight:800;
-
 }
-
-
-/* =========================
-   LISTA
-========================= */
 
 #lista{
-
     width:100%;
-
     max-width:900px;
-
     margin:0 auto;
-
 }
-
-
-/* =========================
-   CARD FAN OUT
-========================= */
 
 .card{
-
     background:#1e1e1e;
-
     border-radius:24px;
-
     padding:18px 16px 16px;
-
     margin-bottom:14px;
-
     border-top:4px solid var(--cor);
-
-    box-shadow:
-        0 4px 14px rgba(0,0,0,.18);
-
+    box-shadow:0 4px 14px rgba(0,0,0,.18);
 }
-
-
-/* =========================
-   CABEÇALHO
-========================= */
 
 .cabecalho{
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:12px;
-
     margin-bottom:14px;
-
 }
-
 
 .nome{
-
     font-size:22px;
-
     font-weight:800;
-
     line-height:1.15;
-
     color:#fff;
-
 }
-
 
 .quantidade{
-
     font-size:44px;
-
     line-height:1;
-
     font-weight:800;
-
     min-width:52px;
-
     text-align:right;
-
     color:#fff;
-
 }
-
-
-/* =========================
-   BOTÕES
-========================= */
 
 .controles{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(6,1fr);
-
+    grid-template-columns:repeat(6,1fr);
     gap:10px;
-
 }
-
 
 .controles button{
-
     border:0;
-
     border-radius:15px;
-
     height:64px;
-
     color:#fff;
-
     font-size:20px;
-
     font-weight:800;
-
     cursor:pointer;
-
 }
 
-
-.mais{
-
-    background:#00c853;
-
-}
-
-
-.menos{
-
-    background:#e00000;
-
-}
-
-
-/* =========================
-   STATUS DOCA
-========================= */
+.mais{background:#00c853}
+.menos{background:#e00000}
 
 .status{
-
     width:100%;
-
     margin-top:12px;
-
     height:60px;
-
     border:0;
-
     border-radius:16px;
-
     color:#fff;
-
     font-size:18px;
-
     font-weight:800;
-
     cursor:pointer;
-
 }
 
-
-.status.fora{
-
-    background:#2962ff;
-
-}
-
-
-.status.doca{
-
-    background:#00a63c;
-
-}
-
-
-/* =========================
-   TOTAL
-========================= */
+.status.fora{background:#2962ff}
+.status.doca{background:#00a63c}
 
 .total{
-
     max-width:900px;
-
     margin:24px auto 18px;
-
     text-align:center;
-
     color:#00e676;
-
     font-size:42px;
-
     font-weight:900;
-
 }
-
-
-/* =========================
-   AÇÕES
-========================= */
 
 .acoes{
-
     max-width:900px;
-
     margin:0 auto;
-
     display:flex;
-
     flex-direction:column;
-
     gap:12px;
-
 }
-
 
 .acao{
-
     width:100%;
-
     min-height:72px;
-
     border:0;
-
     border-radius:18px;
-
     background:#00c853;
-
     color:#fff;
-
     font-size:21px;
-
     font-weight:800;
-
     cursor:pointer;
-
 }
 
-
-.acao.reset{
-
-    background:#e00000;
-
-}
-
-
-/* =========================
-   RELATÓRIO
-========================= */
+.acao.reset{background:#e00000}
 
 #relatorio{
-
     width:100%;
-
     max-width:900px;
-
     display:block;
-
     margin:18px auto 0;
-
     min-height:170px;
-
     padding:14px;
-
     border:0;
-
     border-radius:18px;
-
     background:#1e1e1e;
-
     color:#fff;
-
     resize:vertical;
-
     font:15px Arial,sans-serif;
-
 }
-
-
-/* =========================
-   MODAL RESET
-========================= */
 
 .modal-fundo{
-
     position:fixed;
-
     inset:0;
-
     background:rgba(0,0,0,.72);
-
     display:none;
-
     align-items:center;
-
     justify-content:center;
-
     padding:20px;
-
     z-index:1000;
-
 }
-
 
 .modal{
-
     width:100%;
-
     max-width:420px;
-
     background:#222;
-
     border-radius:22px;
-
     padding:24px;
-
     text-align:center;
-
-    box-shadow:
-        0 12px 40px rgba(0,0,0,.5);
-
+    box-shadow:0 12px 40px rgba(0,0,0,.5);
 }
-
 
 .modal h2{
-
     margin:0 0 10px;
-
     font-size:24px;
-
 }
-
 
 .modal p{
-
     margin:0 0 22px;
-
     color:#ddd;
-
     line-height:1.4;
-
 }
-
 
 .modal-botoes{
-
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     gap:10px;
-
 }
-
 
 .modal-botoes button{
-
     height:54px;
-
     border:0;
-
     border-radius:13px;
-
     color:#fff;
-
     font-size:17px;
-
     font-weight:800;
-
 }
 
-
-.cancelar{
-
-    background:#555;
-
-}
-
-
-.confirmar{
-
-    background:#e00000;
-
-}
-
-
-/* =========================
-   CELULAR
-========================= */
+.cancelar{background:#555}
+.confirmar{background:#e00000}
 
 @media(max-width:700px){
-
-    body{
-
-        padding:
-            14px
-            10px
-            24px;
-
-    }
-
-
-    h1{
-
-        font-size:24px;
-
-    }
-
-
+    body{padding:14px 10px 24px}
+    h1{font-size:24px}
     .card{
-
         border-radius:22px;
-
-        padding:
-            16px
-            14px
-            14px;
-
+        padding:16px 14px 14px;
     }
-
-
-    .nome{
-
-        font-size:20px;
-
-    }
-
-
-    .quantidade{
-
-        font-size:40px;
-
-    }
-
-
-    .controles{
-
-        gap:8px;
-
-    }
-
-
+    .nome{font-size:20px}
+    .quantidade{font-size:40px}
+    .controles{gap:8px}
     .controles button{
-
         height:62px;
-
         font-size:18px;
-
         border-radius:14px;
-
     }
-
-
     .status{
-
         height:58px;
-
         font-size:17px;
-
     }
-
-
     .total{
-
         font-size:34px;
-
         margin-top:22px;
-
     }
-
-
     .acao{
-
         min-height:68px;
-
         font-size:20px;
-
     }
-
 }
-
-
-/* =========================
-   CELULARES PEQUENOS
-========================= */
 
 @media(max-width:390px){
-
-    .card{
-
-        padding:
-            14px
-            12px
-            12px;
-
-    }
-
-
-    .nome{
-
-        font-size:18px;
-
-    }
-
-
-    .quantidade{
-
-        font-size:36px;
-
-    }
-
-
-    .controles{
-
-        gap:6px;
-
-    }
-
-
+    .card{padding:14px 12px 12px}
+    .nome{font-size:18px}
+    .quantidade{font-size:36px}
+    .controles{gap:6px}
     .controles button{
-
         height:56px;
-
         font-size:16px;
-
         border-radius:13px;
-
     }
-
-
-    .status{
-
-        height:54px;
-
-        font-size:16px;
-
-    }
-
+    .status{height:54px;font-size:16px}
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
 <h1>📦 LH Control</h1>
-
 
 <div id="lista"></div>
 
-
 <div class="total">
-
-    TOTAL GERAL:
-    <span id="total">0</span>
-
+    TOTAL GERAL: <span id="total">0</span>
 </div>
-
 
 <div class="acoes">
-
-
-    <button
-        class="acao"
-        onclick="gerarRelatorio()">
-
-        📋 Gerar Relatório
-
-    </button>
-
-
-    <button
-        class="acao"
-        onclick="copiarRelatorio()">
-
-        📄 Copiar
-
-    </button>
-
-
-    <button
-        class="acao"
-        onclick="compartilhar()">
-
-        📲 Compartilhar
-
-    </button>
-
-
-    <button
-        class="acao reset"
-        onclick="abrirConfirmacao()">
-
-        🔄 Resetar Tudo
-
-    </button>
-
-
+    <button class="acao" onclick="gerarRelatorio()">📋 Gerar Relatório</button>
+    <button class="acao" onclick="copiarRelatorio()">📄 Copiar</button>
+    <button class="acao" onclick="compartilhar()">📲 Compartilhar</button>
+    <button class="acao reset" onclick="abrirConfirmacao()">🔄 Resetar Tudo</button>
 </div>
 
+<textarea id="relatorio" placeholder="O relatório aparecerá aqui..." readonly></textarea>
 
-<textarea
-    id="relatorio"
-    placeholder="O relatório aparecerá aqui..."
-    readonly>
-</textarea>
-
-
-
-<!-- =========================
-     CONFIRMAÇÃO RESET
-========================= -->
-
-<div
-    class="modal-fundo"
-    id="modalReset">
-
-
+<div class="modal-fundo" id="modalReset">
     <div class="modal">
-
-
-        <h2>
-
-            ⚠️ Resetar contagem?
-
-        </h2>
-
-
-        <p>
-
-            Essa ação vai zerar a contagem
-            de todos os fan outs.
-            Deseja continuar?
-
-        </p>
-
-
+        <h2>⚠️ Resetar contagem?</h2>
+        <p>Essa ação vai zerar a contagem de todos os fan outs. Deseja continuar?</p>
         <div class="modal-botoes">
-
-
-            <button
-                class="cancelar"
-                onclick="fecharConfirmacao()">
-
-                Cancelar
-
-            </button>
-
-
-            <button
-                class="confirmar"
-                onclick="confirmarReset()">
-
-                Resetar
-
-            </button>
-
-
+            <button class="cancelar" onclick="fecharConfirmacao()">Cancelar</button>
+            <button class="confirmar" onclick="confirmarReset()">Resetar</button>
         </div>
-
-
     </div>
-
 </div>
-
-
 
 <script>
-
-
-/* =========================
-   FAN OUTS
-========================= */
-
 const locais = [
-
-    {
-        nome:"Rio de Janeiro – RJ01",
-        cor:"#666666"
-    },
-
-    {
-        nome:"Santana – SP0",
-        cor:"#1565c0"
-    },
-
-    {
-        nome:"Simões Filho – BA",
-        cor:"#0277bd"
-    },
-
-    {
-        nome:"Betim – MG",
-        cor:"#827717"
-    },
-
-    {
-        nome:"Curitiba – PR",
-        cor:"#2e7d32"
-    },
-
-    {
-        nome:"Cravinhos – SP05",
-        cor:"#000000"
-    },
-
-    {
-        nome:"Jaboatão dos Guararapes",
-        cor:"#6a1b9a"
-    },
-
-    {
-        nome:"Louveira – SP07",
-        cor:"#6d4c41"
-    },
-
-    {
-        nome:"Gravataí – RS",
-        cor:"#f9a825"
-    },
-
-    {
-        nome:"Goiânia – GO02",
-        cor:"#ef6c00"
-    }
-
+    {nome:"Rio de Janeiro – RJ01", cor:"#666666"},
+    {nome:"Santana – SP0", cor:"#1565c0"},
+    {nome:"Simões Filho – BA", cor:"#0277bd"},
+    {nome:"Betim – MG", cor:"#827717"},
+    {nome:"Curitiba – PR", cor:"#2e7d32"},
+    {nome:"Cravinhos – SP05", cor:"#000000"},
+    {nome:"Jaboatão dos Guararapes", cor:"#6a1b9a"},
+    {nome:"Louveira – SP07", cor:"#6d4c41"},
+    {nome:"Gravataí – RS", cor:"#f9a825"},
+    {nome:"Goiânia – GO02", cor:"#ef6c00"}
 ];
 
+const STORAGE = "lh_paletes_layout_v2";
 
-/* =========================
-   STORAGE
-========================= */
-
-const STORAGE =
-    "lh_paletes_layout_v2";
-
-
-let dados =
-    JSON.parse(
-        localStorage.getItem(STORAGE)
-        || "{}"
-    );
-
-
-/* =========================
-   INICIALIZAR
-========================= */
+let dados = JSON.parse(localStorage.getItem(STORAGE) || "{}");
 
 function inicializar(){
-
-    locais.forEach(local=>{
-
-        if(!dados[local.nome]){
-
-            dados[local.nome]={
-
-                quantidade:0,
-
-                emDoca:false
-
-            };
-
+    locais.forEach(l => {
+        if(!dados[l.nome]){
+            dados[l.nome] = {quantidade:0, emDoca:false};
         }
-
-
-        if(
-            typeof dados[local.nome].quantidade
-            !=="number"
-        ){
-
-            dados[local.nome].quantidade=0;
-
-        }
-
-
-        if(
-            typeof dados[local.nome].emDoca
-            !=="boolean"
-        ){
-
-            dados[local.nome].emDoca=false;
-
-        }
-
+        if(typeof dados[l.nome].quantidade !== "number") dados[l.nome].quantidade = 0;
+        if(typeof dados[l.nome].emDoca !== "boolean") dados[l.nome].emDoca = false;
     });
-
 }
-
-
-/* =========================
-   SALVAR
-========================= */
 
 function salvar(){
-
-    localStorage.setItem(
-
-        STORAGE,
-
-        JSON.stringify(dados)
-
-    );
-
+    localStorage.setItem(STORAGE, JSON.stringify(dados));
 }
 
-
-/* =========================
-   ALTERAR CONTAGEM
-========================= */
-
-function alterar(nome,valor){
-
+function alterar(nome, valor){
     dados[nome].quantidade += valor;
-
-
-    if(
-        dados[nome].quantidade < 0
-    ){
-
-        dados[nome].quantidade=0;
-
-    }
-
-
+    if(dados[nome].quantidade < 0) dados[nome].quantidade = 0;
     salvar();
-
     render();
-
 }
-
-
-/* =========================
-   EM DOCA / FORA
-========================= */
 
 function alternarDoca(nome){
-
-    dados[nome].emDoca =
-        !dados[nome].emDoca;
-
-
+    dados[nome].emDoca = !dados[nome].emDoca;
     salvar();
-
     render();
-
 }
-
-
-/* =========================
-   RENDER
-========================= */
 
 function render(){
-
     inicializar();
 
+    const lista = document.getElementById("lista");
+    lista.innerHTML = "";
 
-    const lista =
-        document.getElementById("lista");
+    locais.forEach(l => {
+        const d = dados[l.nome];
+        const statusClasse = d.emDoca ? "doca" : "fora";
+        const statusTexto = d.emDoca ? "🟢 EM DOCA" : "⛔ FORA DA DOCA";
 
+        const card = document.createElement("div");
+        card.className = "card";
+        card.style.setProperty("--cor", l.cor);
 
-    lista.innerHTML="";
-
-
-    locais.forEach(local=>{
-
-
-        const dadosLocal =
-            dados[local.nome];
-
-
-        const statusClasse =
-            dadosLocal.emDoca
-            ? "doca"
-            : "fora";
-
-
-        const statusTexto =
-            dadosLocal.emDoca
-            ? "🟢 EM DOCA"
-            : "⛔ FORA DA DOCA";
-
-
-        const card =
-            document.createElement("div");
-
-
-        card.className="card";
-
-
-        card.style.setProperty(
-            "--cor",
-            local.cor
-        );
-
-
-        card.innerHTML=`
-
-
+        card.innerHTML = `
             <div class="cabecalho">
-
-
-                <div class="nome">
-
-                    ${local.nome}
-
-                </div>
-
-
-                <div class="quantidade">
-
-                    ${dadosLocal.quantidade}
-
-                </div>
-
-
+                <div class="nome">${l.nome}</div>
+                <div class="quantidade">${d.quantidade}</div>
             </div>
-
-
 
             <div class="controles">
-
-
-                <button
-                    class="mais"
-                    onclick="alterar(${JSON.stringify(local.nome)},1)">
-
-                    +1
-
-                </button>
-
-
-                <button
-                    class="mais"
-                    onclick="alterar(${JSON.stringify(local.nome)},5)">
-
-                    +5
-
-                </button>
-
-
-                <button
-                    class="mais"
-                    onclick="alterar(${JSON.stringify(local.nome)},10)">
-
-                    +10
-
-                </button>
-
-
-                <button
-                    class="menos"
-                    onclick="alterar(${JSON.stringify(local.nome)},-1)">
-
-                    -1
-
-                </button>
-
-
-                <button
-                    class="menos"
-                    onclick="alterar(${JSON.stringify(local.nome)},-5)">
-
-                    -5
-
-                </button>
-
-
-                <button
-                    class="menos"
-                    onclick="alterar(${JSON.stringify(local.nome)},-10)">
-
-                    -10
-
-                </button>
-
-
+                <button class="mais" onclick="alterar(${JSON.stringify(l.nome)},1)">+1</button>
+                <button class="mais" onclick="alterar(${JSON.stringify(l.nome)},5)">+5</button>
+                <button class="mais" onclick="alterar(${JSON.stringify(l.nome)},10)">+10</button>
+                <button class="menos" onclick="alterar(${JSON.stringify(l.nome)},-1)">-1</button>
+                <button class="menos" onclick="alterar(${JSON.stringify(l.nome)},-5)">-5</button>
+                <button class="menos" onclick="alterar(${JSON.stringify(l.nome)},-10)">-10</button>
             </div>
 
-
-
-            <button
-                class="status ${statusClasse}"
-                onclick="alternarDoca(${JSON.stringify(local.nome)})">
-
+            <button class="status ${statusClasse}" onclick="alternarDoca(${JSON.stringify(l.nome)})">
                 ${statusTexto}
-
             </button>
-
-
         `;
 
-
         lista.appendChild(card);
-
-
     });
-
 
     calcularTotal();
-
 }
-
-
-/* =========================
-   TOTAL
-========================= */
 
 function calcularTotal(){
-
-    const total =
-        locais.reduce(
-
-            (soma,local)=>
-
-                soma +
-                (
-                    dados[local.nome]
-                    ?.quantidade || 0
-                ),
-
-            0
-
-        );
-
-
-    document.getElementById(
-        "total"
-    ).textContent=total;
-
+    const total = locais.reduce((soma,l) => soma + (dados[l.nome]?.quantidade || 0), 0);
+    document.getElementById("total").textContent = total;
 }
-
-
-/* =========================
-   RELATÓRIO
-========================= */
 
 function gerarRelatorio(){
-
     inicializar();
 
+    let texto = "📦 RELATÓRIO DE PALETES\n\n";
 
-    let texto =
-        "📦 RELATÓRIO DE PALETES\n\n";
-
-
-    locais.forEach(local=>{
-
-
-        const item =
-            dados[local.nome];
-
-
-        texto +=
-
-            `${local.nome}: ` +
-
-            `${item.quantidade} — ` +
-
-            `${
-                item.emDoca
-                ? "EM DOCA"
-                : "FORA DA DOCA"
-            }\n`;
-
-
+    locais.forEach(l => {
+        const d = dados[l.nome];
+        texto += `${l.nome}: ${d.quantidade} — ${d.emDoca ? "EM DOCA" : "FORA DA DOCA"}\n`;
     });
 
+    texto += `\nTOTAL GERAL: ${locais.reduce((s,l) => s + dados[l.nome].quantidade, 0)}`;
 
-    texto +=
-
-        `\nTOTAL GERAL: ` +
-
-        `${locais.reduce(` +
-        `(s,local)=>s + ` +
-        `dados[local.nome].quantidade,0)}`;
-
-
-    document.getElementById(
-        "relatorio"
-    ).value=texto;
-
-
+    document.getElementById("relatorio").value = texto;
     return texto;
-
 }
-
-
-/* =========================
-   COPIAR
-========================= */
 
 async function copiarRelatorio(){
-
-    let texto =
-        document.getElementById(
-            "relatorio"
-        ).value;
-
-
-    if(!texto){
-
-        texto=gerarRelatorio();
-
-    }
-
+    const texto = document.getElementById("relatorio").value || gerarRelatorio();
 
     try{
-
-        await navigator.clipboard.writeText(
-            texto
-        );
-
-
-        alert(
-            "Relatório copiado!"
-        );
-
-
+        await navigator.clipboard.writeText(texto);
+        alert("Relatório copiado!");
     }catch(e){
-
-        const area =
-            document.getElementById(
-                "relatorio"
-            );
-
-
-        area.removeAttribute(
-            "readonly"
-        );
-
-
+        const area = document.getElementById("relatorio");
+        area.removeAttribute("readonly");
         area.select();
-
-
-        document.execCommand(
-            "copy"
-        );
-
-
-        area.setAttribute(
-            "readonly",
-            "readonly"
-        );
-
-
-        alert(
-            "Relatório copiado!"
-        );
-
+        document.execCommand("copy");
+        area.setAttribute("readonly","readonly");
+        alert("Relatório copiado!");
     }
-
 }
-
-
-/* =========================
-   COMPARTILHAR
-========================= */
 
 async function compartilhar(){
-
-    let texto =
-        document.getElementById(
-            "relatorio"
-        ).value;
-
-
-    if(!texto){
-
-        texto=gerarRelatorio();
-
-    }
-
+    const texto = document.getElementById("relatorio").value || gerarRelatorio();
 
     if(navigator.share){
-
         try{
-
             await navigator.share({
-
-                title:
-                    "Relatório de Paletes",
-
-                text:
-                    texto
-
+                title:"Relatório de Paletes",
+                text:texto
             });
-
-        }catch(e){
-
-            /* cancelado pelo usuário */
-
-        }
-
-
+        }catch(e){}
     }else{
-
         await copiarRelatorio();
-
     }
-
 }
-
-
-/* =========================
-   CONFIRMAÇÃO RESET
-========================= */
 
 function abrirConfirmacao(){
-
-    document.getElementById(
-        "modalReset"
-    ).style.display="flex";
-
+    document.getElementById("modalReset").style.display = "flex";
 }
-
 
 function fecharConfirmacao(){
-
-    document.getElementById(
-        "modalReset"
-    ).style.display="none";
-
+    document.getElementById("modalReset").style.display = "none";
 }
-
 
 function confirmarReset(){
-
-    dados={};
-
-
+    dados = {};
     salvar();
-
-
-    document.getElementById(
-        "relatorio"
-    ).value="";
-
-
+    document.getElementById("relatorio").value = "";
     fecharConfirmacao();
-
-
     render();
-
 }
 
-
-/* =========================
-   INICIAR
-========================= */
-
 inicializar();
-
 render();
-
 </script>
 
-
 </body>
-
 </html>
+'''
+
+path = "/mnt/data/index.html"
+with open(path, "w", encoding="utf-8") as f:
+    f.write(html)
+
+print(path)
