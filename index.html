@@ -337,17 +337,17 @@ function render(){
                 <div class="quantidade">${d.quantidade}</div>
             </div>
 
-            <div class="controles">
-                <button class="mais" onclick="alterar(${JSON.stringify(l.nome)},1)">+1</button>
-                <button class="mais" onclick="alterar(${JSON.stringify(l.nome)},5)">+5</button>
-                <button class="mais" onclick="alterar(${JSON.stringify(l.nome)},10)">+10</button>
-                <button class="menos" onclick="alterar(${JSON.stringify(l.nome)},-1)">-1</button>
-                <button class="menos" onclick="alterar(${JSON.stringify(l.nome)},-5)">-5</button>
-                <button class="menos" onclick="alterar(${JSON.stringify(l.nome)},-10)">-10</button>
-            </div>
+            <<div class="controles">
+    <button class="mais" onclick='alterar(${JSON.stringify(l.nome)},1)'>+1</button>
+    <button class="mais" onclick='alterar(${JSON.stringify(l.nome)},5)'>+5</button>
+    <button class="mais" onclick='alterar(${JSON.stringify(l.nome)},10)'>+10</button>
 
-            <button class="status ${statusClasse}" onclick="alternarDoca(${JSON.stringify(l.nome)})">
-                ${statusTexto}
+    <button class="menos" onclick='alterar(${JSON.stringify(l.nome)},-1)'>-1</button>
+    <button class="menos" onclick='alterar(${JSON.stringify(l.nome)},-5)'>-5</button>
+    <button class="menos" onclick='alterar(${JSON.stringify(l.nome)},-10)'>-10</button>
+</div>
+
+<button class="status ${statusClasse}" onclick='alternarDoca(${JSON.stringify(l.nome)})'>
             </button>
         `;
 
